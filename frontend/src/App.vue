@@ -1,14 +1,13 @@
-<script setup lang='ts'>
-const a = 'hello';
-
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+import Header from '@/components/layout/header.vue';
+import Footer from '@/components/layout/footer.vue';
 </script>
 
 <template>
-  <div>
-    <h1>{{ a }}</h1>
-  </div>
+  <Header />
+  <RouterView />
+  <!-- <Footer /> -->
 </template>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
