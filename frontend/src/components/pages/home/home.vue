@@ -1,14 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Banner from './layout/banner.vue';
+import Rebates from './layout/rebates.vue';
+import BuyTheMost from './layout/buyTheMost.vue'
+import Order from './layout/order.vue'
+import Utilities from './layout/utilities.vue'
+</script>
 
 <template>
   <div class="wrapper">
-    <div class="banner h-[680px] w-[full]">
-      <div class="baner-one relative mx-auto w-[100%] h-[100%]">
-        <img src="@/assets/image/banner/banner-1.svg" alt="" class="w-[100%] h-[100%] fill-none"/>
-        <div class="absolute top-[60%] left-[50%] -translate-y-[60%] -translate-x-[20%]">
-          <img src="@/assets/image/banner/banner-1-element.svg" alt=""/>
-        </div>
-      </div>
+    <Banner />
+    <div class="wrapper-content">
+      <Rebates />
+      <BuyTheMost />
+      <Order />
+      <Utilities />
     </div>
   </div>
 </template>
