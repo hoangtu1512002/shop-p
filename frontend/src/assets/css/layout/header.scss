@@ -1,0 +1,17 @@
+.header-logo a img {
+  width: 110px;
+  height: auto;
+  background-size: contain;
+  filter: invert(42%) sepia(61%) saturate(3788%) hue-rotate(335deg) brightness(102%) contrast(110%);
+}
+.header-menu::after {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 20px;
+  position: absolute;
+  background: #9999;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+}

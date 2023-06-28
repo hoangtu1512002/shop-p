@@ -1,0 +1,13 @@
+.footer {
+  background-color: rgb(255, 255, 255);
+}
+.footer-logo > img {
+  width: 110px;
+  height: auto;
+  background-size: contain;
+  filter: invert(42%) sepia(61%) saturate(3788%) hue-rotate(335deg) brightness(102%) contrast(110%);
+}
+.footer-social a img:hover {
+  filter: invert(42%) sepia(61%) saturate(3788%) hue-rotate(335deg) brightness(102%) contrast(110%);
+  transition: all 0.4s ease-in-out;
+}

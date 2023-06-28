@@ -1,27 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    name: 'home',
-    component: () => import('@/views/home/home.vue'),
-  },
+import { user } from './user'
+import { error } from './error'
 
-  {
-    path: '/cart',
-    name: 'cart',
-    component: () => import('@/views/cart/cart.vue'),
-  },
-
-  {
-    path: '/:catchAll(.*)',
-    name: 'NotFound',
-    component: () => import('@/views/404/404.vue'),
-  },
-];
+const routes: Array<RouteRecordRaw> = [...user, ...error];
 
 const router = createRouter({
   history: createWebHistory(),
+  linkExactActiveClass: 'exact-active-link',
   routes,
 });
 

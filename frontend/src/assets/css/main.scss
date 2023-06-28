@@ -19,3 +19,17 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
 }
+
+.wrapper {
+  background: linear-gradient(to bottom, #fff, #fff7f7);
+  padding-bottom: 20px;
+}
+
+.content {
+  width: 1200px;
+  margin: 40px auto;
+}
+
+.exact-active-link {
+  color: var(--primary-color);
+}
