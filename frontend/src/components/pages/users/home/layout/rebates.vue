@@ -36,7 +36,7 @@ const modules = [Autoplay, Navigation];
         prevEl: '.rebates-prev-btn',
       }"
       :autoplay="{
-        delay: 2500,
+        delay: 5000,
         disableOnInteraction: false,
       }"
       :loop="true"
@@ -44,7 +44,7 @@ const modules = [Autoplay, Navigation];
     >
       <swiper-slide>
         <div class="rabates-list mt-[20px] grid gap-[10px] grid-cols-5">
-          <div class="rabates-item rounded-xl border bg-[#fff]">
+          <div class="rabates-item rounded-xl border bg-[#fff] relative">
             <div class="rabates-img">
               <a href="" class="rabates-item-link">
                 <img
@@ -67,105 +67,19 @@ const modules = [Autoplay, Navigation];
               <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
               <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
             </div>
-          </div>
 
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/02dNb0Qm3DjC__0SdXqPg1AEJu7v5v_MombzErRqcVc/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzL2M0NmExNTc0LWI3OGMtNDliZS1hMzA0LWMzZDhmNGM3MDFhOC1zdWdpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm đùi gà</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
-            </div>
-          </div>
-
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/02dNb0Qm3DjC__0SdXqPg1AEJu7v5v_MombzErRqcVc/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzL2M0NmExNTc0LWI3OGMtNDliZS1hMzA0LWMzZDhmNGM3MDFhOC1zdWdpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm đùi gà</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
-            </div>
-          </div>
-
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/02dNb0Qm3DjC__0SdXqPg1AEJu7v5v_MombzErRqcVc/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzL2M0NmExNTc0LWI3OGMtNDliZS1hMzA0LWMzZDhmNGM3MDFhOC1zdWdpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm đùi gà</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
-            </div>
-          </div>
-
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/02dNb0Qm3DjC__0SdXqPg1AEJu7v5v_MombzErRqcVc/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzL2M0NmExNTc0LWI3OGMtNDliZS1hMzA0LWMzZDhmNGM3MDFhOC1zdWdpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm đùi gà</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
+            <div class="rabates-item-action">
+              <div class="flex flex-col gap-[4px]">
+                <button class="bg-[#fff] rounded-lg hover:bg-[var(--primary-color)] hover:text-[#fff] duration-300">
+                  <font-awesome-icon class="block p-[10px]" :icon="['fas', 'eye']" />
+                </button>
+                <button class="bg-[#fff] rounded-lg hover:bg-[var(--primary-color)] hover:text-[#fff] duration-300">
+                  <font-awesome-icon class="block p-[10px]" :icon="['fas', 'cart-plus']" />
+                </button>
+                <button class="bg-[#fff] rounded-lg hover:bg-[var(--primary-color)] hover:text-[#fff] duration-300">
+                  <font-awesome-icon class="block p-[10px]" :icon="['fas', 'heart']" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -173,7 +87,7 @@ const modules = [Autoplay, Navigation];
 
       <swiper-slide>
         <div class="rabates-list mt-[20px] grid gap-[10px] grid-cols-5">
-          <div class="rabates-item rounded-xl border bg-[#fff]">
+          <div class="rabates-item rounded-xl border bg-[#fff] relative">
             <div class="rabates-img">
               <a href="" class="rabates-item-link">
                 <img
@@ -196,105 +110,18 @@ const modules = [Autoplay, Navigation];
               <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
               <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
             </div>
-          </div>
-
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/GCuWz2mjnZWiS7DIGExOnQGokt9vgffFzErfFE3LvjU/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzLzhlNDM4ODFhLTdlNTgtNDJlZi1iMmYxLWZlNjI5NDQzZjdlNS1rYWtpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm ba rọi heo</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
-            </div>
-          </div>
-
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/GCuWz2mjnZWiS7DIGExOnQGokt9vgffFzErfFE3LvjU/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzLzhlNDM4ODFhLTdlNTgtNDJlZi1iMmYxLWZlNjI5NDQzZjdlNS1rYWtpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm ba rọi heo</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
-            </div>
-          </div>
-
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/GCuWz2mjnZWiS7DIGExOnQGokt9vgffFzErfFE3LvjU/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzLzhlNDM4ODFhLTdlNTgtNDJlZi1iMmYxLWZlNjI5NDQzZjdlNS1rYWtpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm ba rọi heo</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
-            </div>
-          </div>
-
-          <div class="rabates-item rounded-xl border bg-[#fff]">
-            <div class="rabates-img">
-              <a href="" class="rabates-item-link">
-                <img
-                  src="https://images.deliany.co/GCuWz2mjnZWiS7DIGExOnQGokt9vgffFzErfFE3LvjU/fill/600/600/ce/1/czM6Ly9tYWZmaWFjby1jYXJhdmFuLWltYWdlcy1wcm9kdWN0aW9uL2F0dGFjaG1lbnRzLzhlNDM4ODFhLTdlNTgtNDJlZi1iMmYxLWZlNjI5NDQzZjdlNS1rYWtpLnBuZw"
-                  class="rounded-tl-lg rounded-tr-lg"
-                  alt=""
-                />
-              </a>
-            </div>
-            <h1 class="rabates-title ml-[10px] mr-[10px] font-bold text-lg my-[10px] truncate">
-              <a href="">Cơm ba rọi heo</a>
-            </h1>
-            <a
-              href=""
-              class="rabates-description h-[40px] ml-[10px] mr-[10px] text-[var(--text-color)] line-clamp-2 mb-[20px]"
-            >
-              Combo Beru gồm 1 hộp Omisoka, 1 hộp salad Wafu và 1 hộp cuốn sushi
-            </a>
-            <div class="ml-[10px] mr-[10px] mb-[10px]">
-              <strong class="text-[var(--primary-color)]"> 59.0000₫ </strong>
-              <span class="text-[12px] font-[400] line-through text-[var(--text-color)] ml-[10px]"> 69.0000₫ </span>
+            <div class="rabates-item-action">
+              <div class="flex flex-col gap-[4px]">
+                <button class="bg-[#fff] rounded-lg hover:bg-[var(--primary-color)] hover:text-[#fff] duration-300">
+                  <font-awesome-icon class="block p-[10px]" :icon="['fas', 'eye']" />
+                </button>
+                <button class="bg-[#fff] rounded-lg hover:bg-[var(--primary-color)] hover:text-[#fff] duration-300">
+                  <font-awesome-icon class="block p-[10px]" :icon="['fas', 'cart-plus']" />
+                </button>
+                <button class="bg-[#fff] rounded-lg hover:bg-[var(--primary-color)] hover:text-[#fff] duration-300">
+                  <font-awesome-icon class="block p-[10px]" :icon="['fas', 'heart']" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -306,5 +133,20 @@ const modules = [Autoplay, Navigation];
 <style lang="scss" scoped>
 .disabled {
   background-color: gray;
+}
+
+.rabates-item:hover .rabates-item-action {
+  transform: translateX(-10px);
+  opacity: 1;
+  visibility: visible;
+}
+.rabates-item-action {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  transform: translateX(20px);
+  transition: all 0.3s ease-in-out;
 }
 </style>
