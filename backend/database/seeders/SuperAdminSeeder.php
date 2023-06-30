@@ -27,12 +27,12 @@ class SuperAdminSeeder extends Seeder
             'role_name' => 'Admin',
         ]);
 
-        $superAdmin->roles()->attach($superAdminRole->id);
-
+        
         $manageUsersPermission = Permission::create([
             'permission_name' => 'super_permission',
         ]);
 
-        $superAdminRole->permissions()->attach($manageUsersPermission->id);
+        $superAdmin->roles()->attach($superAdminRole->id);
+        $superAdmin->permissions()->attach($manageUsersPermission->id);
     }
 }

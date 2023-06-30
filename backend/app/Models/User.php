@@ -54,4 +54,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'user_role');
     }
+
+    /**
+     * The roles that belong to the Role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function permissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Permission::class,'user_permission');
+    }
 }

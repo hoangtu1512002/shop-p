@@ -51,7 +51,7 @@
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
-                        <span class="hide-menu">Dashboard</span>
+                        <span class="hide-menu text-[14px]">Dashboard</span>
                     </a>
                 </li>
             @endcan
@@ -62,8 +62,17 @@
                         <span>
                             <i class="ti ti-brand-coinbase"></i>
                         </span>
-                        <span class="hide-menu">Danh mục</span>
+                        <span class="hide-menu text-[14px]">Danh mục</span>
                     </a>
+
+                    <ul class="nav open-menu menu-child">
+                        <li class="nav-item menu-child-item">
+                            <a class="nav-link menu-child-link" href="{{ route('admin.category.create') }}"
+                                aria-expanded="false">
+                                <span class="hide-menu text-[14px]">Thêm danh mục mới</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             @endcan
 
@@ -73,20 +82,20 @@
                         <span>
                             <i class="ti ti-brand-producthunt"></i>
                         </span>
-                        <span class="hide-menu">Quản lý sản phẩm</span>
+                        <span class="hide-menu text-[14px]">Quản lý sản phẩm</span>
                     </a>
 
                     <ul class="nav open-menu menu-child">
                         <li class="nav-item menu-child-item">
                             <a class="nav-link menu-child-link" href="{{ route('admin.product.create') }}"
                                 aria-expanded="false">
-                                <span class="hide-menu">Thêm sản phẩm mới</span>
+                                <span class="hide-menu text-[14px]">Thêm sản phẩm mới</span>
                             </a>
                         </li>
 
                         <li class="nav-item menu-child-item">
                             <a class="nav-link menu-child-link" href="" aria-expanded="false">
-                                <span class="hide-menu">Khuyễn mãi</span>
+                                <span class="hide-menu text-[14px]">Khuyễn mãi</span>
                             </a>
                         </li>
                     </ul>
@@ -99,19 +108,19 @@
                         <span>
                             <i class="ti ti-users"></i>
                         </span>
-                        <span class="hide-menu">Quản lý người dùng</span>
+                        <span class="hide-menu text-[14px]">Quản lý người dùng</span>
                     </a>
 
                     <ul class="nav open-menu menu-child">
                         <li class="nav-item menu-child-item">
                             <a class="nav-link menu-child-link" href="" aria-expanded="false">
-                                <span class="hide-menu">Thêm người dùng mới</span>
+                                <span class="hide-menu text-[14px]">Thêm người dùng mới</span>
                             </a>
                         </li>
 
                         <li class="nav-item menu-child-item">
                             <a class="nav-link menu-child-link" href="" aria-expanded="false">
-                                <span class="hide-menu">Phân quyền người dùng</span>
+                                <span class="hide-menu text-[14px]">Phân quyền người dùng</span>
                             </a>
                         </li>
                     </ul>

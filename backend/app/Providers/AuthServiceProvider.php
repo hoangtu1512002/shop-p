@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Policies\Admin\AdminMenuPolicy;
+use App\Policies\Admin\PermissionPolicy;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         $this->showTemplateByRoles();
-        $this->checkRole();
+        $this->checkPermission();
     }
 
     /**
@@ -42,20 +44,14 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view-user-manager', [AdminMenuPolicy::class, 'viewUserManager']);
     }
 
-    /**
+     /**
      *  
      * 
      * @return void
      */
-    private function checkRole ()
+    private function checkPermission ()
     {
-        Gate::define('isAdmin', function($user) {
-            return $user->roles->contains('role_name', 'Admin');
-        });
-
-        Gate::define('isUser', function($user) {
-            return $user->roles->contains('role_name', 'User');
-        });
+        Gate::define('supper-permission', [PermissionPolicy::class, 'create']);
     }
 
 }

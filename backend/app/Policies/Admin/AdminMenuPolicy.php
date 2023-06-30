@@ -9,16 +9,6 @@ class AdminMenuPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     private function hasAccess(User $user, array $allowedRoles)
     {
         $allowedRoles = array_merge($allowedRoles, ['Admin']);
@@ -27,13 +17,13 @@ class AdminMenuPolicy
 
     public function viewDashboard(User $user)
     {
-        $allowedRoles = []; // thêm các Role được phép truy cập view này tại đây.
+        $allowedRoles = ['User']; // thêm các Role được phép truy cập view này tại đây.
         return $this->hasAccess($user, $allowedRoles);
     }
 
     public function viewCategory(User $user)
     {
-        $allowedRoles = []; // thêm các Role được phép truy cập view này tại đây.
+        $allowedRoles = ['User']; // thêm các Role được phép truy cập view này tại đây.
         return $this->hasAccess($user, $allowedRoles);
     }
 

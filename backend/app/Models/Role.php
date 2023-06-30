@@ -23,14 +23,4 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class, 'user_role');
     }
-
-    /**
-     * The roles that belong to the Role
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function permissions(): BelongsToMany
-    {
-        return $this->belongsToMany(Permission::class,'role_permission');
-    }
 }

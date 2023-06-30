@@ -18,6 +18,8 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
 
     Route::prefix('category')->middleware('can:view-category')->group(function() {
         Route::get('', [CategoryController::class, 'index'])->name('admin.category.view');
+        Route::get('create', [CategoryController::class, 'create'])->name('admin.category.create');
+        Route::post('create', [CategoryController::class, 'store'])->name('admin.category.store');
     });
 
     Route::prefix('product')->middleware('can:view-product')->group(function() {
