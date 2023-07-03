@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/styles.min.css') }}" />
+
 </head>
 
 <body>
@@ -17,6 +18,7 @@
         @yield('main')
         @include('common.success', ['data' => 'success'])
         @include('common.error', ['data' => 'error'])
+        @include('common.delete-modal')
     </div>
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

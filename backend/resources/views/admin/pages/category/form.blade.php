@@ -1,25 +1,25 @@
-<form action="{{ $action }}" method="POST">
+<form action="{{ $action }}" method="POST" enctype="multipart/form-data" id="form">
     @csrf
     <div class="from-group">
         <label for="" class="form-label">Tên danh mục</label>
-        <input type="text" class="form-control" name="category[name]"
-            value="{{ old('category[name]', $category->name ?? '') }}">
+        <input type="text" class="form-control" name="name" value="{{ $category->name ?? '' }}">
     </div>
 
     <div class="form-group mt-[20px]">
         <label for="" class="form-label">hình ảnh</label>
-        <input type="file" class="form-control" name="category[image]" onchange="previewImage(event)">
+        <input type="file" class="form-control" name="image" onchange="previewImage(event)">
     </div>
 
     <div class="preview mt-[10px] w-[200px] h-[200px] border cover rounded-xl">
-        @if ($category && $category->image)
-            <img src="{{ $category->image_url }}" alt="hình ảnh" class="preview-img w-full h-full object-contain rounded-xl">
+        @if ($category && $category->image_url)
+            <img src="{{ $category->image_url }}" alt="hình ảnh"
+                class="preview-img w-full h-full object-contain rounded-xl">
         @else
             <img src="" alt="hình ảnh" class="preview-img w-full h-full object-contain rounded-xl hidden">
         @endif
     </div>
 
-    <button type="submit"
+    <button type="submit" id="button"
         class="border-2 border-[#5d87ff] rounded-lg py-[10px] px-[60px] mt-[20px] mx-auto hover:bg-[#5d87ff] hover:text-white duration-200">xác
         nhận</button>
 </form>
@@ -45,9 +45,9 @@
         }
     }
 
-    window.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('load', function() {
         previewImage({
-            target: document.querySelector('input[name="category[image]"]')
+            target: document.querySelector('input[name="image"]')
         });
     });
 </script>

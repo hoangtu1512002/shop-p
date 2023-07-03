@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ImageRule;
 
 class CategoryRequest extends FormRequest
 {
@@ -23,18 +24,19 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'category.name' => 'required|max:100',
-            'category.image' => 'required'
+            'name' => 'required|max:100',
+            'image' => !$this->id ? 'required' : "" 
         ];
     }
 
     public function messages()
     {
         return [
-            'category.name.required' => 'vui lòng nhập tên danh mục.',
-            'category.name.max' => 'độ dài không vượt quá 100 kí tự.',
-            'category.image.required' => 'không được để ảnh trống.',
+            'name.required' => 'vui lòng nhập tên danh mục.',
+            'name.max' => 'độ dài không vượt quá 100 kí tự.',
+            'image.required' => 'không được để ảnh trống.',
         ];
     }
 }

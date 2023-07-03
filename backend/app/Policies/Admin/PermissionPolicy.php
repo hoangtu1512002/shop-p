@@ -11,7 +11,7 @@ class PermissionPolicy
 
     private function hasAccess(User $user, array $allowedPermission)
     {
-        $allowedPermission = array_merge($allowedPermission, ['super_permission']);;
+        $allowedPermission = array_merge($allowedPermission, ['super_permission']);
         return $user->permissions->pluck('permission_name')->intersect($allowedPermission)->count() > 0;
     }
 

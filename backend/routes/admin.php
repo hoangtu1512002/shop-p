@@ -20,6 +20,9 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
         Route::get('', [CategoryController::class, 'index'])->name('admin.category.view');
         Route::get('create', [CategoryController::class, 'create'])->name('admin.category.create');
         Route::post('create', [CategoryController::class, 'store'])->name('admin.category.store');
+        Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+        Route::post('update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
+        Route::post('delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
     });
 
     Route::prefix('product')->middleware('can:view-product')->group(function() {

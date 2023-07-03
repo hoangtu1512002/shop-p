@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="card p-[20px]">
-        @include('category.form', ['action' => route('category.update', $category->id), 'category' => $category,])
+        @include('admin.pages.category.form', ['action' => route('admin.category.update', $category->id), 'category' => $category])
     </div>
 @endsection

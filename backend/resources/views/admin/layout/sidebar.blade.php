@@ -51,7 +51,7 @@
                         <span>
                             <i class="ti ti-layout-dashboard"></i>
                         </span>
-                        <span class="hide-menu text-[14px]">Dashboard</span>
+                        <span class="hide-menu text-[14px]">Tổng quát</span>
                     </a>
                 </li>
             @endcan
