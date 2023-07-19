@@ -8,7 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\belongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\Role;
+use App\Models\UserInfo;
 
 class User extends Authenticatable
 {
@@ -63,5 +65,16 @@ class User extends Authenticatable
     public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(Permission::class,'user_permission');
+    }
+
+
+    /**
+     * Get the user associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function userInfo(): HasOne
+    {
+        return $this->hasOne(UserInfo::class, 'user_id', 'id');
     }
 }

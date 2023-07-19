@@ -29,7 +29,7 @@ class SuperAdminSeeder extends Seeder
 
         
         $manageUsersPermission = Permission::create([
-            'permission_name' => 'super_permission',
+            'permission_name' => 'supper_permission',
         ]);
 
         $superAdmin->roles()->attach($superAdminRole->id);

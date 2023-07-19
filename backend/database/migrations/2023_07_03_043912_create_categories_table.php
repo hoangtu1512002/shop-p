@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('image_name');
             $table->string('image_url');
+            $table->integer('status')->default(1)->comment('1 là đang bán, 2 là ngưng bán, 3 yêu cầu xóa');
             $table->timestamps();
         });
     }

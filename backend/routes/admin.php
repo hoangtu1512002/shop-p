@@ -23,14 +23,22 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
         Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::post('update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
         Route::post('delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
+        Route::get('stop/selling', [CategoryController::class, 'getStopSelling'])->name('admin.category.stop.selling.view');
+        Route::post('stop/selling/{id}', [CategoryController::class, 'stopSelling'])->name('admin.category.stop.selling');
+        Route::post('restore/{id}', [CategoryController::class, 'restore'])->name('admin.category.restore');
     });
 
     Route::prefix('product')->middleware('can:view-product')->group(function() {
         Route::get('', [ProductController::class, 'index'])->name('admin.product.view');
         Route::get('create', [ProductController::class, 'create'])->name('admin.product.create');
+        Route::post('create', [ProductController::class, 'create'])->name('admin.product.store');
+        Route::get('edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
+        Route::post('update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
+        Route::post('delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
     });
 
     Route::prefix('user')->middleware('can:view-user-manager')->group(function() {
-        Route::get('management', [UserManagementController::class, 'index'])->name('admin.user.management.view');
+        Route::get('management/admin', [UserManagementController::class, 'getAdministrators'])->name('admin.user.management.admin');
+        Route::get('management/customer', [UserManagementController::class, 'getCustomers'])->name('admin.user.management.customer');
     });
 });

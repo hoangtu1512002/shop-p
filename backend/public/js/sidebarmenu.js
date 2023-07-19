@@ -1,30 +1,38 @@
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
     var currentUrl = window.location.href;
+    var sidebarLinks = document.querySelectorAll(".sidebar-link");
 
-    $(".sidebar-link").each(function () {
-        var link = $(this);
-        var linkUrl = link.attr("href");
+    sidebarLinks.forEach((sidebarLink) => {
+        let sidebarLinkUrl = sidebarLink.getAttribute("href");
+        let openMenu = sidebarLink.nextElementSibling;
+        let pathname = sidebarLink.pathname;
 
-        if (currentUrl === linkUrl) {
-            link.addClass("active");
-            var openMenu = link.next(".open-menu");
-            if (openMenu.length > 0) {
-                openMenu.addClass("show");
+        if (
+            currentUrl.startsWith(sidebarLinkUrl) &&
+            currentUrl.length === sidebarLinkUrl.length
+        ) {
+            sidebarLink.classList.add("active");
+
+            if (openMenu !== null && openMenu.classList.contains("open-menu")) {
+                openMenu.classList.add("show");
             }
         }
 
-        var menuChild = link.next(".open-menu");
-        if (menuChild.length > 0) {
-            var childLink = menuChild.find(".menu-child-link");
-            childLink.each(function () {
-                var childLinkUrl = $(this).attr("href");
-                if (currentUrl === childLinkUrl) {
-                    $(this).addClass("active");
-                    link.addClass("active");
-                    var openMenu = link.next(".open-menu");
-                    if (openMenu.length > 0) {
-                        openMenu.addClass("show");
-                    }
+        if (openMenu !== null && openMenu.classList.contains("open-menu")) {
+            let childLinks = openMenu.querySelectorAll(".menu-child-link");
+
+            childLinks.forEach((childLink) => {
+                let childLinkUrl = childLink.getAttribute("href");
+
+                if (childLinkUrl === currentUrl) {
+                    sidebarLink.classList.add("active");
+                    childLink.classList.add("active");
+                    openMenu.classList.add("show");
+                }
+
+                if (currentUrl.includes(pathname)) {
+                    sidebarLink.classList.add("active");
+                    openMenu.classList.add("show");
                 }
             });
         }

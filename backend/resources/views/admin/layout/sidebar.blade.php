@@ -45,87 +45,35 @@
     </div>
     <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
         <ul id="sidebarnav">
-            @can('view-dashboard')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('admin.dashboard') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-layout-dashboard"></i>
-                        </span>
-                        <span class="hide-menu text-[14px]">Tổng quát</span>
-                    </a>
-                </li>
-            @endcan
+            @foreach ($menus as $menu)
+                @can($menu->view)
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route($menu->route) }}" aria-expanded="false">
+                            <span>
+                                {!! $menu->icon !!}
+                            </span>
+                            <span class="hide-menu text-[14px]">{{ $menu->name }}</span>
+                        </a>
 
-            @can('view-category')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('admin.category.view') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-brand-coinbase"></i>
-                        </span>
-                        <span class="hide-menu text-[14px]">Danh mục</span>
-                    </a>
-
-                    <ul class="nav open-menu menu-child">
-                        <li class="nav-item menu-child-item">
-                            <a class="nav-link menu-child-link" href="{{ route('admin.category.create') }}"
-                                aria-expanded="false">
-                                <span class="hide-menu text-[14px]">Thêm danh mục mới</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
-
-            @can('view-product')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('admin.product.view') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-brand-producthunt"></i>
-                        </span>
-                        <span class="hide-menu text-[14px]">Quản lý sản phẩm</span>
-                    </a>
-
-                    <ul class="nav open-menu menu-child">
-                        <li class="nav-item menu-child-item">
-                            <a class="nav-link menu-child-link" href="{{ route('admin.product.create') }}"
-                                aria-expanded="false">
-                                <span class="hide-menu text-[14px]">Thêm sản phẩm mới</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item menu-child-item">
-                            <a class="nav-link menu-child-link" href="" aria-expanded="false">
-                                <span class="hide-menu text-[14px]">Khuyễn mãi</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
-
-            @can('view-user-manager')
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{ route('admin.user.management.view') }}" aria-expanded="false">
-                        <span>
-                            <i class="ti ti-users"></i>
-                        </span>
-                        <span class="hide-menu text-[14px]">Quản lý người dùng</span>
-                    </a>
-
-                    <ul class="nav open-menu menu-child">
-                        <li class="nav-item menu-child-item">
-                            <a class="nav-link menu-child-link" href="" aria-expanded="false">
-                                <span class="hide-menu text-[14px]">Thêm người dùng mới</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item menu-child-item">
-                            <a class="nav-link menu-child-link" href="" aria-expanded="false">
-                                <span class="hide-menu text-[14px]">Phân quyền người dùng</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endcan
+                        @if (isset($menu->child))
+                            <ul class="nav open-menu menu-child">
+                                @foreach ($menu->child as $child)
+                                    @can($child->view ?? null)
+                                        <li class="nav-item menu-child-item">
+                                            <a class="nav-link menu-child-link" href="{{ route($child->route) }}"
+                                                aria-expanded="false">
+                                                <span class="hide-menu text-[14px]"><i class="ti ti-caret-right"></i>
+                                                    {{ $child->name }}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
+                @endcan
+            @endforeach
         </ul>
     </nav>
 </div>

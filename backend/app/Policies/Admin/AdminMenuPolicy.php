@@ -3,39 +3,35 @@
 namespace App\Policies\Admin;
 
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Policies\BasePolicies;
 
-class AdminMenuPolicy
+class AdminMenuPolicy extends BasePolicies
 {
-    use HandlesAuthorization;
-
-    private function hasAccess(User $user, array $allowedRoles)
-    {
-        $allowedRoles = array_merge($allowedRoles, ['Admin']);
-        return $user->roles->pluck('role_name')->intersect($allowedRoles)->count() > 0;
-    }
+    private $table = 'roles';
+    private $column = 'role_name';
+    private $allowed = ['Admin']; // các role có quyền truy cập vào tất cả menu
 
     public function viewDashboard(User $user)
     {
-        $allowedRoles = ['User']; // thêm các Role được phép truy cập view này tại đây.
-        return $this->hasAccess($user, $allowedRoles);
+        $allowedRolesOrther = ['Category_management', 'Product_management', 'User_management']; 
+        return $this->hasAccess($user, $this->table, $this->column, $this->allowed, $allowedRolesOrther);
     }
 
     public function viewCategory(User $user)
     {
-        $allowedRoles = ['User']; // thêm các Role được phép truy cập view này tại đây.
-        return $this->hasAccess($user, $allowedRoles);
+        $allowedRolesOrther = ['Category_management'];
+        return $this->hasAccess($user, $this->table, $this->column, $this->allowed, $allowedRolesOrther);
     }
 
     public function viewProduct(User $user)
     {
-        $allowedRoles = []; // thêm các Role được phép truy cập view này tại đây.
-        return $this->hasAccess($user, $allowedRoles);
+        $allowedRolesOrther = ['Product_management'];
+        return $this->hasAccess($user, $this->table, $this->column, $this->allowed, $allowedRolesOrther);
     }
 
     public function viewUserManager(User $user)
     {
-        $allowedRoles = []; // thêm các Role được phép truy cập view này tại đây.
-        return $this->hasAccess($user, $allowedRoles);
+        $allowedRolesOrther = ['User_management'];
+        return $this->hasAccess($user, $this->table, $this->column, $this->allowed, $allowedRolesOrther);
     }
 }

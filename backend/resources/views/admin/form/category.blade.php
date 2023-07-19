@@ -2,7 +2,8 @@
     @csrf
     <div class="from-group">
         <label for="" class="form-label">Tên danh mục</label>
-        <input type="text" class="form-control" name="name" value="{{ $category->name ?? '' }}">
+        <input type="text" class="form-control" name="name"
+            value="{{ $category->name ?? (old('name') ?? session('name')) }}">
     </div>
 
     <div class="form-group mt-[20px]">
@@ -10,12 +11,11 @@
         <input type="file" class="form-control" name="image" onchange="previewImage(event)">
     </div>
 
-    <div class="preview mt-[10px] w-[200px] h-[200px] border cover rounded-xl">
+    <div class="preview mt-[10px]">
         @if ($category && $category->image_url)
-            <img src="{{ $category->image_url }}" alt="hình ảnh"
-                class="preview-img w-full h-full object-contain rounded-xl">
+            <img src="{{ $category->image_url }}" alt="hình ảnh" class="preview-img border block p-[4px] max-w-[200px] max-h-[220px] object-contain rounded-xl">
         @else
-            <img src="" alt="hình ảnh" class="preview-img w-full h-full object-contain rounded-xl hidden">
+            <img src="" alt="hình ảnh" class="preview-img block max-w-[200px] max-h-[220px] border p-[4px] object-contain rounded-xl hidden">
         @endif
     </div>
 
@@ -28,20 +28,20 @@
 <script>
     function previewImage(event) {
         var input = event.target;
-        var preview = document.querySelector('.preview-img');
+        var previewImg = document.querySelector('.preview-img');
 
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function(e) {
-                preview.src = e.target.result;
-                preview.classList.remove('hidden');
+                previewImg.src = e.target.result;
+                previewImg.classList.remove('hidden');
             };
 
             reader.readAsDataURL(input.files[0]);
         } else {
-            preview.src = '';
-            preview.classList.add('hidden');
+            previewImg.src = '';
+            previewImg.classList.add('hidden');
         }
     }
 

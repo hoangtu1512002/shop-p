@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="card p-[20px]">
-        @include('admin.pages.category.form', ['action' => route('admin.category.store'), 'category' => null])
+        @include('admin.form.category', ['action' => route('admin.category.store'), 'category' => null])
     </div>
 @endsection

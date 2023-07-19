@@ -1,8 +1,9 @@
 <style>
     #success-alert {
+        min-width: 300px;
         position: fixed;
         top: 50px;
-        right: -300px;
+        right: -400px;
         transition: right 0.5s ease-out;
         z-index: 9999;
     }
