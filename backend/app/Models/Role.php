@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\belongsToMany;
 use App\Models\User;
-use App\Models\Permission;
 
 class Role extends Model
 {
@@ -14,7 +13,7 @@ class Role extends Model
 
     protected $table = 'roles';
 
-    protected $fillable = ['role_name'];
+    protected $fillable = ['role', 'name'];
 
     /**
      * Get the user that owns the Role

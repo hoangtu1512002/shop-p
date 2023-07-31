@@ -24,12 +24,14 @@ class SuperAdminSeeder extends Seeder
         ]);
 
         $superAdminRole = Role::create([
-            'role_name' => 'Admin',
+            'role' => 'Admin',
+            'name' => 'Quản trị viên'
         ]);
 
         
         $manageUsersPermission = Permission::create([
-            'permission_name' => 'supper_permission',
+            'permission' => 'supper_permission',
+            'name' => 'Quyền quản tri viên'
         ]);
 
         $superAdmin->roles()->attach($superAdminRole->id);

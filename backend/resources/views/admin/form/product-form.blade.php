@@ -28,14 +28,12 @@
             <div class="form-group mt-[20px]">
                 <label for="" class="form-label">Danh mục sản phẩm</label>
                 <select name="" id="" class="w-full border p-[10px] rounded-lg">
-                    <option class="w-full p-[4px]" value="">đsầ</option>
-                    <option value="">đsầ</option>
+                    <option class="w-full p-[4px]" value=""></option>
+                    <option value=""></option>
                 </select>
             </div>
         </div>
     </div>
-
-
     <button type="submit" id="button"
         class="border-2 border-[#5d87ff] rounded-lg py-[10px] px-[60px] mt-[20px] mx-auto hover:bg-[#5d87ff] hover:text-white duration-200">xác
         nhận</button>

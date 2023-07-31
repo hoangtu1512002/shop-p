@@ -8,8 +8,8 @@ use App\Models\User;
 class CategoryPolicy extends BasePolicies
 {
     private $table = 'permissions';
-    private $column = 'permission_name';
-    private $allowed = ['supper_permission', 'category_management']; // các permission có quyền truy cập
+    private $column = 'permission';
+    private $allowed = ['supper_permission', 'category_supper_permission'];
 
     public function create(User $user)
     {

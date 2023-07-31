@@ -15,10 +15,13 @@ return new class extends Migration
     {
         Schema::create('user_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
+            $table->string('fullname', 255);
+            $table->string('nickname', 255)->nullable();
             $table->string('phone', 10);
             $table->string('address', 500);
             $table->string('avatar', 500)->nullable();
+            $table->string('interest')->nullable();
+            $table->integer('isActive')->default(2)->comment('1 active, 2 vô hiệu');
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

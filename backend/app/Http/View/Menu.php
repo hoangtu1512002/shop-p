@@ -22,17 +22,17 @@ class Menu
                 'icon' => '<i class="ti ti-brand-coinbase"></i>',
                 'child' => [
                     (object) [
+                        'name' => 'Thêm danh mục mới',
+                        'view' => 'create-category', // lấy tại file AuthServiceProvider
+                        'route' => 'admin.category.create'
+                    ],
+                    (object) [
                         'name' => 'Đang sử dụng',
                         'route' => 'admin.category.view'
                     ],
                     (object) [
                         'name' => 'Đã ngưng sử dụng',
                         'route' => 'admin.category.stop.selling.view'
-                    ],
-                    (object) [
-                        'name' => 'Thêm danh mục mới',
-                        'view' => 'create-category', // lấy tại file AuthServiceProvider
-                        'route' => 'admin.category.create'
                     ],
                 ]
             ],
@@ -54,13 +54,13 @@ class Menu
             ],
             (object) [
                 'name' => 'Người dung',
-                'route' => 'admin.user.management.admin',
+                'route' => 'admin.user.management.staff',
                 'view' => 'view-user-manager',
                 'icon' => '<i class="ti ti-users"></i>',
                 'child' => [
                     (object) [
                         'name' => 'Quản lý nhân sự',
-                        'route' => 'admin.user.management.admin'
+                        'route' => 'admin.user.management.staff'
                     ],
                     (object) [
                         'name' => 'Khách hàng đăng kí',
@@ -69,7 +69,6 @@ class Menu
                 ]
             ]
         ]);
-
         $view->with('menus', $menus);
     }
 }

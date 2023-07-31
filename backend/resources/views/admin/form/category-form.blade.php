@@ -13,9 +13,11 @@
 
     <div class="preview mt-[10px]">
         @if ($category && $category->image_url)
-            <img src="{{ $category->image_url }}" alt="hình ảnh" class="preview-img border block p-[4px] max-w-[200px] max-h-[220px] object-contain rounded-xl">
+            <img src="{{ $category->image_url }}" alt="hình ảnh"
+                class="preview-img border block p-[4px] max-w-[200px] max-h-[220px] object-contain rounded-xl">
         @else
-            <img src="" alt="hình ảnh" class="preview-img block max-w-[200px] max-h-[220px] border p-[4px] object-contain rounded-xl hidden">
+            <img src="" alt="hình ảnh"
+                class="preview-img max-w-[200px] max-h-[220px] border p-[4px] object-contain rounded-xl hidden">
         @endif
     </div>
 

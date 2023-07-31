@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        <div class="card p-[20px]">
+        <div class="card p-[20px] mt-[40px]">
             <div class="card-header">
                 <a href="{{ route('admin.product.create') }}" class="btn btn-outline-danger">Thêm mới</a>
             </div>

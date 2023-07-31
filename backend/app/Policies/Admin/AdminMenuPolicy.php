@@ -8,8 +8,8 @@ use App\Policies\BasePolicies;
 class AdminMenuPolicy extends BasePolicies
 {
     private $table = 'roles';
-    private $column = 'role_name';
-    private $allowed = ['Admin']; // các role có quyền truy cập vào tất cả menu
+    private $column = 'role';
+    private $allowed = ['Admin'];
 
     public function viewDashboard(User $user)
     {

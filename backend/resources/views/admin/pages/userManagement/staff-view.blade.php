@@ -2,9 +2,9 @@
 
 @section('content')
     <div>
-        <div class="card p-[20px]">
+        <div class="card p-[20px] mt-[40px]">
             <div class="card-header">
-                <a href="" class="btn btn-outline-danger">Thêm nhân viên</a>
+                <a href="{{ route('admin.user.management.create.staff') }}" class="btn btn-outline-danger">Thêm nhân viên</a>
             </div>
             <div class="card-body p-[10px]">
                 <table class="table">
