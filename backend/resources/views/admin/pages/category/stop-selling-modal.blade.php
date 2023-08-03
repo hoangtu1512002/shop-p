@@ -10,7 +10,7 @@
         <p class="text-[12px] pl-[10px]">các sản phẩm đang sử dụng danh mục này sẽ bị ẩn.</p>
 
         <div class="flex justify-end py-[20px] pr-[20px] gap-[10px]">
-            <form action="" method="POST" id="form-confirm">
+            <form action="" method="POST" id="form-stop-selling-confirm">
                 @csrf
                 @method('POST')
                 <button type="submit" class="btn btn-danger">
@@ -33,7 +33,7 @@
 
     function stopSellingModal(route) {
         const modal = document.querySelector('#modal-stop');
-        const confirm = document.querySelector('#form-confirm');
+        const confirm = document.querySelector('#form-stop-selling-confirm');
         modal.classList.toggle('hidden');
         confirm.action = route
     }

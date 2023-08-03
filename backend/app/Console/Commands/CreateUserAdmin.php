@@ -1,22 +1,35 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Console\Commands;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Permission;
 
-class SuperAdminSeeder extends Seeder
+class CreateUserAdmin extends Command
 {
     /**
-     * Run the database seeds.
+     * The name and signature of the console command.
      *
-     * @return void
+     * @var string
      */
-    public function run()
+    protected $signature = 'make:user:admin';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Create a super admin user and roles';
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
     {
         $superAdmin  = User::create([
             'email' => 'hoangtu1512002@gmail.com',
@@ -28,13 +41,13 @@ class SuperAdminSeeder extends Seeder
             'name' => 'Quản trị viên'
         ]);
 
-        
         $manageUsersPermission = Permission::create([
             'permission' => 'supper_permission',
-            'name' => 'Quyền quản tri viên'
+            'name' => 'Quyền quản trị viên'
         ]);
 
         $superAdmin->roles()->attach($superAdminRole->id);
         $superAdmin->permissions()->attach($manageUsersPermission->id);
+        $this->info('Super admin user and roles created successfully.');
     }
 }

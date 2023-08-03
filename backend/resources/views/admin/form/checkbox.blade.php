@@ -55,13 +55,15 @@
         transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
     }
 </style>
-
 @if (isset($permissions))
     @foreach ($permissions as $permission)
+        @php
+            $checked = isset($userEdit) ? $userEdit->permissions->pluck('id')->contains($permission->id) : false;
+        @endphp
         <div class="mb-[10px]">
             <nav class="form-label">{{ $permission->name }}</nav>
             <label class="switch">
-                <input type="checkbox" name="permissions[]" value="{{ $permission->id }}">
+                <input type="checkbox" name="permissions[]" value="{{ $permission->id }}" @if ($checked) checked @endif>
                 <span class="slider"></span>
             </label>
         </div>

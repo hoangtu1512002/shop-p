@@ -63,7 +63,7 @@ class Menu
                         'route' => 'admin.user.management.staff'
                     ],
                     (object) [
-                        'name' => 'Khách hàng đăng kí',
+                        'name' => 'Khách hàng',
                         'route' => 'admin.user.management.customer'
                     ],
                 ]

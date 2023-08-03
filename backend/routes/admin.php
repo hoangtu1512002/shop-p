@@ -40,8 +40,15 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
     Route::prefix('user-management')->middleware('can:view-user-manager')->group(function () {
         Route::get('', [UserManagementController::class, 'getStaff'])->name('admin.user.management.staff');
         Route::get('customer', [UserManagementController::class, 'getCustomers'])->name('admin.user.management.customer');
-        Route::get('staff/create', [UserManagementController::class, 'createStaff'])->name('admin.user.management.create.staff');
-        Route::post('staff/store', [UserManagementController::class, 'storeStaff'])->name('admin.user.management.store.staff');
+        Route::get('staff/create', [UserManagementController::class, 'createStaff'])->name('admin.user.management.staff.create');
+        Route::post('staff/store', [UserManagementController::class, 'storeStaff'])->name('admin.user.management.staff.store');
+        Route::get('staff/edit/{usid}', [UserManagementController::class, 'editStaff'])->name('admin.user.management.staff.edit');
+        Route::post('staff/update/{usid}', [UserManagementController::class, 'updateStaff'])->name('admin.user.management.staff.update');
+        Route::get('staff/info/{usid}', [UserManagementController::class, 'staffUserInfo'])->name('admin.user.management.staff.info');
     });
+
+
+
+    // api ajax route
     Route::post('get/permission/{role_id}', [ApiController::class, 'apiGetPermissionByRole']);
 });

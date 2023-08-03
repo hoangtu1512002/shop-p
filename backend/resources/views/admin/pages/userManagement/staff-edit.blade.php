@@ -3,13 +3,13 @@
 @section('content')
     <div class="card p-[20px] mt-[40px]">
         <div class="card-header">
-            <div class="card-title">Thêm nhân viên mới</div>
+            <div class="card-title">Thêm mới tài khoản nhân viên</div>
         </div>
         <div class="card-body">
             @include('admin.form.user-staff-form', [
-                'action' => route('admin.user.management.store.staff'),
+                'action' => route('admin.user.management.staff.update', $user->id),
                 'roles' => $roles,
-                'user' => null,
+                'user' => $user,
             ])
         </div>
     </div>
@@ -17,23 +17,29 @@
 
 @section('scripts')
     $(document).ready(function() {
-        var roleId = $('.form-staff').val(); 
-        loadPermissions(roleId); 
+        var roleId = $('.form-staff').val();
+        var user = @json($user);
+        loadPermissions(roleId, user.id); 
     
         $('.form-staff').on('change', function(e) {
             var newRoleId = e.target.value;
-            loadPermissions(newRoleId);
+            loadPermissions(newRoleId, user.id);
     
         });
+        
 
-        function loadPermissions(roleId) {
+
+        function loadPermissions(roleId, userId = null) {
             $.ajax({
                     url: "{{ url('admin/get/permission') }}/" + roleId,
                     type: "POST",
-                    dataType: 'json'
+                    data: {
+                        type: "edit",
+                        userId: userId
+                    }
                 })
                 .then(function(res) {
-                    $('.checkbox-container').html(res.html);
+                    $('.checkbox-container').html(res);
                 })
                 .catch(function(error) {
                     console.log('error:', error);

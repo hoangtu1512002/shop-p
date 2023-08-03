@@ -10,7 +10,7 @@
         <p class="text-[12px] pl-[10px]">các sản phẩm đang sử dụng danh mục này sẽ hiển thị lại.</p>
 
         <div class="flex justify-end py-[20px] pr-[20px] gap-[10px]">
-            <form action="" method="POST" id="form-confirm">
+            <form action="" method="POST" id="form-restore-confirm">
                 @csrf
                 @method('POST')
                 <button type="submit" class="btn btn-danger">
@@ -33,7 +33,7 @@
 
     function restoreModal(route) {
         const modal = document.querySelector('#restore-modal');
-        const confirm = document.querySelector('#form-confirm');
+        const confirm = document.querySelector('#form-restore-confirm');
         modal.classList.toggle('hidden');
         confirm.action = route
     }

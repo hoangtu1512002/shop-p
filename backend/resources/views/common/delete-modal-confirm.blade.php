@@ -11,7 +11,6 @@
         <div class="flex justify-end py-[20px] pr-[20px] gap-[10px]">
             <form action="" method="POST" id="form-confirm">
                 @csrf
-                @method('POST')
                 <button type="submit" class="btn btn-danger">
                     Xác nhận
                 </button>
@@ -22,12 +21,10 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.querySelector('#modal');
-        const btnClose = document.getElementById('btn-close');
-        btnClose.addEventListener('click', function() {
-            modal.classList.add('hidden')
-        });
+    const modal = document.querySelector('#modal');
+    const btnClose = document.getElementById('btn-close');
+    btnClose.addEventListener('click', function() {
+        modal.classList.add('hidden')
     });
 
     function deleteModal(route) {

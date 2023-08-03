@@ -25,6 +25,7 @@
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('js/select2.js') }}"></script>
+    <script src="{{ asset('js/inputmask.js') }}"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -32,8 +33,10 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             $('.select2').select2();
-            @yield('scripts')
+
+            @yield('scripts');
         });
     </script>
 </body>

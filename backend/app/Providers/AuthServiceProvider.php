@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Gate;
 use App\Policies\Admin\AdminMenuPolicy;
 use App\Policies\Admin\CategoryPolicy;
+use App\Policies\Admin\UserManagementPolicy;
 
 
 class AuthServiceProvider extends ServiceProvider
@@ -29,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         $this->showTemplateByRoles();
         $this->checkPermissionCategory();
+        $this->checkPermissionUserManagement();
     }
 
     /**
@@ -55,5 +57,19 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-category', [CategoryPolicy::class, 'update']);
         Gate::define('delete-category', [CategoryPolicy::class, 'delete']);
         Gate::define('selling-category', [CategoryPolicy::class, 'selling']);
+    }
+
+    /**
+     *  Category permission
+     * 
+     * @return void
+     */
+    private function checkPermissionUserManagement ()
+    {
+        Gate::define('create-user', [UserManagementPolicy::class, 'create']);
+        Gate::define('update-user', [UserManagementPolicy::class, 'update']);
+        Gate::define('update-info-user', [UserManagementPolicy::class, 'updateInfo']);
+        Gate::define('disable-user', [UserManagementPolicy::class, 'disable']);
+        Gate::define('delete-user', [UserManagementPolicy::class, 'delete']);
     }
 }

@@ -2,7 +2,8 @@
     @csrf
     <div class="from-group">
         <label for="" class="form-label">Email</label>
-        <input type="text" class="form-control" name="email" autocomplete="off">
+        <input type="text" class="form-control" name="email" autocomplete="off"
+            value="{{ $user->email ?? (old('email') ?? session('email')) }}">
     </div>
 
     <div class="form-group mt-[20px]">
@@ -11,41 +12,21 @@
     </div>
 
     <div class="form-group mt-[20px]">
-        <label for="" class="form-label">Họ và tên nhân viên</label>
-        <input type="text" class="form-control" name="fullname">
-    </div>
-
-    <div class="form-group mt-[20px]">
-        <label for="" class="form-label">Biệt danh</label>
-        <input type="text" class="form-control" name="nickname">
-    </div>
-
-    <div class="form-group mt-[20px]">
-        <label for="" class="form-label">Số điện thoại</label>
-        <input type="text" class="form-control" name="phone">
-    </div>
-
-    <div class="form-group mt-[20px]">
-        <label for="" class="form-label">Địa chỉ</label>
-        <input type="text" class="form-control" name="address">
-    </div>
-
-    <div class="form-group mt-[20px]">
-        <label for="" class="form-label">Sở thích</label>
-        <input type="text" class="form-control" name="interest">
-    </div>
-
-    <div class="form-group mt-[20px]">
         <label for="" class="form-label">Chức vụ</label>
         <select class="form-staff form-select select2" name="role">
             @foreach ($roles as $role)
-                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                @php
+                    $selected = isset($user) ? $user->roles->contains('id', $role->id) : false;
+                @endphp
+                <option value="{{ $role->id }}" @if ($selected) selected @endif>
+                    {{ $role->name }}
+                </option>
             @endforeach
         </select>
     </div>
 
     <div class="form-group checkbox-container mt-[20px]">
-        @include('admin.common.checkbox')
+        @include('admin.form.checkbox', ['user' => $user])
     </div>
 
     <button type="submit" id="button"
