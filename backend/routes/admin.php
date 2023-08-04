@@ -45,6 +45,7 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
         Route::get('staff/edit/{usid}', [UserManagementController::class, 'editStaff'])->name('admin.user.management.staff.edit');
         Route::post('staff/update/{usid}', [UserManagementController::class, 'updateStaff'])->name('admin.user.management.staff.update');
         Route::get('staff/info/{usid}', [UserManagementController::class, 'staffUserInfo'])->name('admin.user.management.staff.info');
+        Route::post('staff/info/{usid}', [UserManagementController::class, 'staffUserInfoUpdate'])->name('admin.user.management.staff.info.update');
     });
 
 

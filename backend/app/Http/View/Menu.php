@@ -59,8 +59,13 @@ class Menu
                 'icon' => '<i class="ti ti-users"></i>',
                 'child' => [
                     (object) [
-                        'name' => 'Quản lý nhân sự',
+                        'name' => 'Quản lý nhân viên',
                         'route' => 'admin.user.management.staff'
+                    ],
+                    (object) [
+                        'name' => 'Thêm mới nhân viên',
+                        'route' => 'admin.user.management.staff.create',
+                        'view' => 'create-user'
                     ],
                     (object) [
                         'name' => 'Khách hàng',

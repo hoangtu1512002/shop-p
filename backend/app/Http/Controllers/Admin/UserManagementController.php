@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StaffUserRequest;
-use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Helpers\Message;
+use App\Http\Requests\Admin\StaffUserRequest;
+use App\Http\Requests\Admin\StaffUserInfoRequest;
+use App\Models\UserInfo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-
-
-
+use App\Helpers\GoogleDriver;
 
 class UserManagementController extends Controller
 {
@@ -104,6 +103,42 @@ class UserManagementController extends Controller
 
     public function staffUserInfo($usid)
     {
-        return view('admin.pages.userManagement.staff-info');
+        if (Gate::allows('update-info-user')) {
+            $user = UserInfo::find($usid);
+            if ($user) {
+                return view('admin.pages.userManagement.staff-info', ['usid' => $usid, 'user' => $user]);
+            }
+            return view('admin.pages.userManagement.staff-info', ['usid' => $usid, 'user' => null]);
+        }
+        return redirect()->back()->withErrors(Message::notAccess);
+    }
+
+    public function staffUserInfoUpdate(StaffUserInfoRequest $staffUserInfoRequest, $usid)
+    {
+        $userInfo = UserInfo::updateOrCreate(
+            ['user_id' => $usid],
+            [
+                'fullname' => $staffUserInfoRequest->fullname,
+                'nickname' => $staffUserInfoRequest->nickname,
+                'phone' => $staffUserInfoRequest->phone,
+                'gender' => $staffUserInfoRequest->gender,
+                'date_of_birth' => $staffUserInfoRequest->date_of_birth,
+                'address' => $staffUserInfoRequest->address,
+                'date_start_work' => $staffUserInfoRequest->date_start_work,
+                'salary' => $staffUserInfoRequest->salary,
+            ]
+        );
+
+        if ($staffUserInfoRequest->avatar) {
+            $avatar = GoogleDriver::upload($staffUserInfoRequest->avatar);
+            $oldAvatar = $userInfo->getOriginal('avatar');
+            $userInfo->avatar = $avatar['name'];
+            $userInfo->avatar_url = $avatar['url'];
+            $userInfo->save();
+            GoogleDriver::delete($oldAvatar);
+        }
+
+        session()->flash('success', Message::createSuccess);
+        return redirect()->route('admin.user.management.staff');
     }
 }

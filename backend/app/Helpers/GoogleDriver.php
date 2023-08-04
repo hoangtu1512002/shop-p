@@ -35,6 +35,8 @@ class GoogleDriver
 
     public static function delete($image)
     {
-        Storage::disk('google')->delete($image);
+        if($image) {
+            Storage::disk('google')->delete($image);
+        }
     }
 }

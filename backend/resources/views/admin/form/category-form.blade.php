@@ -1,13 +1,13 @@
 <form action="{{ $action }}" method="POST" enctype="multipart/form-data" id="form">
     @csrf
     <div class="from-group">
-        <label for="" class="form-label">Tên danh mục</label>
+        <label for="" class="form-label flex">Tên danh mục <nav class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
         <input type="text" class="form-control" name="name"
             value="{{ $category->name ?? (old('name') ?? session('name')) }}">
     </div>
 
     <div class="form-group mt-[20px]">
-        <label for="" class="form-label">hình ảnh</label>
+        <label for="" class="form-label flex">hình ảnh <nav class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
         <input type="file" class="form-control" name="image" onchange="previewImage(event)">
     </div>
 

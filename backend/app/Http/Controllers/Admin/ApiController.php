@@ -45,7 +45,7 @@ class ApiController extends Controller
                 break;
         }
 
-        return view('admin.form.checkbox', [
+        return view('admin.api.checkbox', [
             'permissions' => $permissions,
             'userEdit' => $userEdit
         ]);

@@ -25,16 +25,20 @@
                                     src="{{ $category->image_url }}" alt="hình ảnh">
                             </td>
                             <td class="font-bold text-end">
-                                <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}"
-                                    class="btn btn-success text-xl font-medium"><i class="ti ti-edit"></i></a>
-                                <button type="button" class="btn btn-dark text-xl font-medium"
-                                    onclick="stopSellingModal('{{ route('admin.category.stop.selling', ['id' => $category->id]) }}')">
-                                    <i class="ti ti-x"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger text-xl font-medium"
-                                    onclick="deleteModal('{{ route('admin.category.delete', ['id' => $category->id]) }}')">
-                                    <i class="ti ti-trash"></i>
-                                </button>
+                                @can('update-category')
+                                    <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}"
+                                        class="btn btn-success text-xl font-medium"><i class="ti ti-edit"></i></a>
+                                @endcan
+                                @can('delete-category')
+                                    <button type="button" class="btn btn-dark text-xl font-medium"
+                                        onclick="stopSellingModal('{{ route('admin.category.stop.selling', ['id' => $category->id]) }}')">
+                                        <i class="ti ti-x"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger text-xl font-medium"
+                                        onclick="deleteModal('{{ route('admin.category.delete', ['id' => $category->id]) }}')">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

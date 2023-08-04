@@ -11,6 +11,23 @@ class UserInfo extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_infos';
+
+    protected $fillable = [
+        "fullname",
+        "nickname",
+        "date_of_birth",
+        "gender",
+        "phone",
+        "address",
+        "date_start_work",
+        "salary",
+        "interest",
+        "avatar",
+        "avatar_url",
+        "date_end_work",
+        'user_id'
+    ];
     /**
      * Get the user that owns the UserInfo
      *

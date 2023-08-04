@@ -16939,11 +16939,10 @@ fieldset:disabled .btn {
     position: relative;
 }
 .body-wrapper {
-    height: 100%;
     position: relative;
     top: 0;
     bottom: 0;
-    background-color: #f7f7f8;
+    background: #ebedee;
 }
 
 
