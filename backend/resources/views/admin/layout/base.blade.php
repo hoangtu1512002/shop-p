@@ -35,11 +35,15 @@
                 }
             });
 
-            $('.loader-container').addClass('show')
+            $('.loader-container').addClass('show');
 
             $('.select2').select2();
 
             @yield('scripts');
+        });
+
+        $('form').on('submit', function(e) {
+            $('.loader-container').addClass('show');
         });
 
         $(window).on('load', function() {
