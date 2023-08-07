@@ -20,6 +20,7 @@
         @include('common.success')
         @include('common.error')
         @include('common.delete-modal-confirm')
+        @include('common.loader')
     </div>
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -34,9 +35,15 @@
                 }
             });
 
+            $('.loader-container').addClass('show')
+
             $('.select2').select2();
 
             @yield('scripts');
+        });
+
+        $(window).on('load', function() {
+            $('.loader-container').removeClass('show');
         });
     </script>
 </body>

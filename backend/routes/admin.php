@@ -46,8 +46,12 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
         Route::post('staff/update/{usid}', [UserManagementController::class, 'updateStaff'])->name('admin.user.management.staff.update');
         Route::get('staff/info/{usid}', [UserManagementController::class, 'staffUserInfo'])->name('admin.user.management.staff.info');
         Route::post('staff/info/{usid}', [UserManagementController::class, 'staffUserInfoUpdate'])->name('admin.user.management.staff.info.update');
+        Route::post('staff/disable/{usid}', [UserManagementController::class, 'staffUserDisable'])->name('admin.user.management.staff.disable');
+        Route::post('staff/delete/{usid}', [UserManagementController::class, 'staffUserDelete'])->name('admin.user.management.staff.delete');
+        Route::get('get/disable-user', [UserManagementController::class, 'getDisableUser'])->name('admin.user.management.disable');
+        Route::post('restore/{usid}', [UserManagementController::class, 'restoreUser'])->name('admin.user.management.restore');
     });
-
+ 
 
 
     // api ajax route

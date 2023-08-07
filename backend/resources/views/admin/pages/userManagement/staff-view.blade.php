@@ -31,8 +31,15 @@
                                     <a href="{{ route('admin.user.management.staff.info', ['usid' => $staffUser->id]) }}"
                                         class="btn btn-primary text-xl font-medium"><i class="ti ti-eye"></i></a>
                                 @endcan
+                                @can('disable-user')
+                                    <button class="btn btn-warning text-xl font-medium"
+                                        onclick="disableModal('{{ route('admin.user.management.staff.disable', ['usid' => $staffUser->id]) }}')">
+                                        <i class="ti ti-x"></i>
+                                    </button>
+                                @endcan
                                 @can('delete-user')
-                                    <button type="button" class="btn btn-danger text-xl font-medium">
+                                    <button type="button" class="btn btn-danger text-xl font-medium"
+                                        onclick="deleteModal('{{ route('admin.user.management.staff.delete', ['usid' => $staffUser->id]) }}')">
                                         <i class="ti ti-trash"></i>
                                     </button>
                                 @endcan
@@ -43,4 +50,6 @@
             </div>
         </div>
     </div>
+    @include('admin.pages.userManagement.disable-modal')
 @endsection
+

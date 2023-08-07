@@ -68,6 +68,11 @@ class Menu
                         'view' => 'create-user'
                     ],
                     (object) [
+                        'name' => 'Nhân viên đã vô hiệu',
+                        'route' => 'admin.user.management.disable',
+                        'view' => 'disable-user'
+                    ],
+                    (object) [
                         'name' => 'Khách hàng',
                         'route' => 'admin.user.management.customer'
                     ],

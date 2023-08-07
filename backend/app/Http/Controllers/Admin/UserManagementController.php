@@ -28,9 +28,9 @@ class UserManagementController extends Controller
     {
         $staffUser = User::whereDoesntHave('roles', function ($query) {
             if ($this->checkUserReuqestRole() === 'Admin') {
-                $query->where('role', 'Customer');
+                $query->where('role', 'Customer')->orWhere('is_active', '0');
             } else {
-                $query->where('role', 'Customer')->orWhere('role', 'Admin');
+                $query->where('role', 'Customer')->orWhere('role', 'Admin')->orWhere('is_active', '0');
             }
         })->get();
 
@@ -87,16 +87,17 @@ class UserManagementController extends Controller
     {
         $staffUserUpdate = User::findOrFail($usid);
 
+        if ($staffUserUpdate->id === Auth::id()) {
+            return redirect()->back()->withErrors(Message::notAccess);
+        }
+
         $staffUserUpdate->update([
             'email' => $staffUserRequest->email,
             'password' => $staffUserRequest->password ? Hash::make($staffUserRequest->password) : $staffUserUpdate->password,
         ]);
 
-        if ($staffUserUpdate->id !== Auth::id()) {
-            $staffUserUpdate->roles()->sync($staffUserRequest->role);
-            $staffUserUpdate->permissions()->sync($staffUserRequest->permissions);
-        }
-
+        $staffUserUpdate->roles()->sync($staffUserRequest->role);
+        $staffUserUpdate->permissions()->sync($staffUserRequest->permissions);
         session()->flash('success', Message::updateSuccess);
         return redirect()->route('admin.user.management.staff');
     }
@@ -139,6 +140,45 @@ class UserManagementController extends Controller
         }
 
         session()->flash('success', Message::createSuccess);
+        return redirect()->route('admin.user.management.staff');
+    }
+
+    public function staffUserDisable($usid)
+    {
+        $staffUserUpdate = User::findOrFail($usid);
+        if ($staffUserUpdate->id === Auth::id()) {
+            return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
+        }
+        $staffUserUpdate->is_active = 0;
+        $staffUserUpdate->save();
+        session()->flash('success', Message::updateSuccess);
+        return redirect()->route('admin.user.management.staff');
+    }
+
+    public function staffUserDelete($usid)
+    {
+        dd($usid);
+    }
+
+    public function getDisableUser()
+    {
+        $index = 1;
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('role', '!==', 'Customer')->orWhere('is_active', 0);
+        })->get();
+
+        return view('admin.pages.userManagement.disable', [
+            'users' => $users,
+            'index'=> $index
+        ]);
+    }
+
+    public function restoreUser ($usid) 
+    {
+        $restoreUser = User::findOrFail($usid);
+        $restoreUser->is_active = 1;
+        $restoreUser->save();
+        session()->flash('success', Message::updateSuccess);
         return redirect()->route('admin.user.management.staff');
     }
 }
