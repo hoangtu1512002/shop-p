@@ -503,6 +503,12 @@ video {
 .top-\[20\%\] {
   top: 20%;
 }
+.left-\[10px\] {
+  left: 10px;
+}
+.top-\[10px\] {
+  top: 10px;
+}
 .z-50 {
   z-index: 50;
 }
@@ -555,6 +561,9 @@ video {
 }
 .mt-\[40px\] {
   margin-top: 40px;
+}
+.ml-\[10px\] {
+  margin-left: 10px;
 }
 .block {
   display: block;

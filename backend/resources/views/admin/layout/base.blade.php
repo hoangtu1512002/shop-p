@@ -23,7 +23,7 @@
     </div>
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('js/sidebarmenu.js') }}?v=js_sidebar"></script>
     <script src="{{ asset('js/select2.js') }}"></script>
     <script src="{{ asset('js/inputmask.js') }}"></script>
     <script>

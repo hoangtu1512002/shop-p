@@ -65,17 +65,17 @@ class User extends Authenticatable
      */
     public function permissions(): BelongsToMany
     {
-        return $this->belongsToMany(Permission::class,'user_permission');
+        return $this->belongsToMany(Permission::class, 'user_permission');
     }
 
 
     /**
      * Get the user associated with the User
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
-    public function userInfo(): belongsToMany
+    public function user_info(): belongsTo
     {
-        return $this->belongsToMany(UserInfo::class, 'user_id', 'id');
+        return $this->belongsTo(UserInfo::class, 'id', 'user_id');
     }
 }

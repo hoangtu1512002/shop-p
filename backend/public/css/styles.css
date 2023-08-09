@@ -3431,10 +3431,10 @@ textarea.form-control.is-invalid {
     z-index: 4;
 }
 .btn {
-    --bs-btn-padding-x: 16px;
-    --bs-btn-padding-y: 7px;
+    --bs-btn-padding-x: 8px;
+    --bs-btn-padding-y: 4px;
     --bs-btn-font-family: ;
-    --bs-btn-font-size: 14;
+    --bs-btn-font-size: 12;
     --bs-btn-font-weight: 500;
     --bs-btn-line-height: 1.5;
     --bs-btn-color: #5a6a85;
@@ -16943,7 +16943,8 @@ fieldset:disabled .btn {
     top: 0;
     bottom: 0;
     background: #ebedee;
-    height: 100vh;
+    height: max-content;
+    min-height: 100vh;
 }
 
 

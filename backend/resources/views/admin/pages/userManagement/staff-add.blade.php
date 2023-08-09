@@ -17,9 +17,9 @@
 
 @section('scripts')
     $(document).ready(function() {
-        var roleId = $('.form-staff').val(); 
-        loadPermissions(roleId); 
-    
+        var roleId = $('.form-staff').val();
+        loadPermissions(roleId);
+
         $('.form-staff').on('change', function(e) {
             var newRoleId = e.target.value;
             loadPermissions(newRoleId);
@@ -30,7 +30,7 @@
                     url: "{{ url('admin/get/permission') }}/" + roleId,
                     type: "POST",
                     data: {
-                        type: 'create' 
+                        type: 'create'
                     }
                 })
                 .then(function(res) {
