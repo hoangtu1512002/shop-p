@@ -6,7 +6,7 @@
             <p class="mb-0 ml-[5px] text-[18px]">Xác nhận!</p>
         </nav>
 
-        <h4 class="text-[18px] py-[5px] pl-[10px] mb-0">khôi phục tài khoản này dữ liệu</h4>
+        <h4 class="text-[18px] py-[5px] pl-[10px] mb-0">Bạn có chắc muốn xóa dữ liệu này ?</h4>
 
         <div class="flex justify-end py-[20px] pr-[20px] gap-[10px]">
             <form action="" method="POST" id="form-user-restore-confirm">
