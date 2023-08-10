@@ -11,7 +11,7 @@
         <label for="" class="form-label flex">hình ảnh <nav class="text-[#ff443d] text-[20px] ml-[4px]">*</nav>
         </label>
         <div class="bg-[#ff443d] w-[40px] h-[40px] rounded-[50%] flex items-center justify-center ml-[4px]">
-            <input type="file" id="image-category" name="avatar" hidden>
+            <input type="file" id="image-category" name="image" hidden>
             <label for="image-category" class="text-[#fff] text-[28px] cursor-pointer"><i
                     class="ti ti-cloud-upload"></i></label>
         </div>
@@ -32,39 +32,3 @@
         nhận</button>
 </form>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-
-        const image_input = document.querySelector('#image-category');
-
-        image_input.addEventListener('change', function(e) {
-            previewImage(e);
-        });
-
-        document.addEventListener('load', function() {
-            previewImage({
-                target: image_input
-            });
-        });
-
-        function previewImage(event) {
-            var input = event.target;
-            var previewImg = document.querySelector('.preview-img');
-
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    previewImg.classList.remove('hidden');
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                previewImg.src = '';
-                previewImg.classList.add('hidden');
-            }
-        }
-    });
-</script>

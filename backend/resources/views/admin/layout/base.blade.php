@@ -26,6 +26,8 @@
     <script src="{{ asset('js/sidebarmenu.js') }}?v=js_sidebar"></script>
     <script src="{{ asset('js/select2.js') }}"></script>
     <script src="{{ asset('js/inputmask.js') }}"></script>
+    <script src="{{ asset('js/modals.js') }}"></script>
+    <script src="{{ asset('js/alert.js') }}"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({

@@ -27,7 +27,7 @@ class CategoryRequest extends FormRequest
 
         return [
             'name' => 'required|max:100|unique:categories,name,' .$this->id. ',id',
-            'image' => !$this->id ? 'required' : "" 
+            'image' => !$this->id ? 'required' : ""
         ];
     }
 

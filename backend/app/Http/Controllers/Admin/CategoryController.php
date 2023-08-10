@@ -19,7 +19,7 @@ class CategoryController extends Controller
         return view('admin.pages.category.view', compact('categories', 'index'));
     }
 
-    public function getStopSelling() 
+    public function getStopSelling()
     {
         $categories = Category::where('status', 2)->get();
         $index = 1;
@@ -85,9 +85,9 @@ class CategoryController extends Controller
         return redirect()->back()->withErrors(Message::notAllowed);
     }
 
-    public function stopSelling($id) 
+    public function stopSelling($id)
     {
-        if(Gate::allows('selling-category')) 
+        if(Gate::allows('selling-category'))
         {
             $category = Category::findOrFail($id);
             $category->status = 2;
@@ -100,7 +100,7 @@ class CategoryController extends Controller
 
     public function restore($id)
     {
-        if(Gate::allows('selling-category')) 
+        if(Gate::allows('selling-category'))
         {
             $category = Category::findOrFail($id);
             $category->status = 1;

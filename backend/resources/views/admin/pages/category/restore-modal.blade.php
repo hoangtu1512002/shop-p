@@ -21,20 +21,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.querySelector('#restore-modal');
-        const btnClose = document.getElementById('btn-close-restore-modal');
-        btnClose.addEventListener('click', function() {
-            modal.classList.add('hidden')
-        });
-    });
-
-    function restoreModal(route) {
-        const modal = document.querySelector('#restore-modal');
-        const confirm = document.querySelector('#form-restore-confirm');
-        modal.classList.toggle('hidden');
-        confirm.action = route
-    }
-</script>

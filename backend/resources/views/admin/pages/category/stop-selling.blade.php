@@ -3,6 +3,9 @@
 @section('content')
     <div>
         <div class="card p-[20px]">
+            <div class="card-header">
+                <h4 class="card-title">Danh mục tạm ngừng sử dụng</h4>
+            </div>
             <div class="card-body p-[10px]">
                 <table class="table">
                     <tr>
@@ -21,11 +24,11 @@
                             </td>
                             <td class="font-bold">
                                 <button type="button" class="btn btn-success text-xl font-medium"
-                                    onclick="restoreModal('{{ route('admin.category.restore', ['id' => $category->id]) }}')">
+                                    onclick="actionModal('{{ route('admin.category.restore', ['id' => $category->id]) }}', 'restore-modal', 'form-restore-confirm', 'btn-close-restore-modal')">
                                     <i class="ti ti-arrow-back"></i>
                                 </button>
                                 <button type="button" class="btn btn-danger text-xl font-medium"
-                                    onclick="deleteModal('{{ route('admin.category.delete', ['id' => $category->id]) }}')">
+                                    onclick="actionModal('{{ route('admin.category.delete', ['id' => $category->id]) }}', 'modal', 'form-confirm', 'btn-close')">
                                     <i class="ti ti-trash"></i>
                                 </button>
                             </td>

@@ -20,21 +20,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.querySelector('#modal-disable');
-        const btnClose = document.getElementById('btn-close-disable-modal');
-        btnClose.addEventListener('click', function() {
-            modal.classList.add('hidden')
-        });
-    });
-    function disableModal(route) {
-        const modal = document.querySelector('#modal-disable');
-        const confirm = document.querySelector('#form-disable-confirm');
-        modal.classList.toggle('hidden');
-        confirm.action = route
-    }
-
-</script>
-

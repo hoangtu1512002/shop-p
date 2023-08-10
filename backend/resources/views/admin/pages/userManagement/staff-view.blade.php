@@ -33,13 +33,13 @@
                                 @endcan
                                 @can('disable-user')
                                     <button class="btn btn-warning text-xl font-medium"
-                                        onclick="disableModal('{{ route('admin.user.management.staff.disable', ['usid' => $staffUser->id]) }}')">
+                                        onclick="actionModal('{{ route('admin.user.management.staff.disable', ['usid' => $staffUser->id]) }}','modal-disable','form-disable-confirm','btn-close-disable-modal')">
                                         <i class="ti ti-x"></i>
                                     </button>
                                 @endcan
                                 @can('delete-user')
                                     <button type="button" class="btn btn-danger text-xl font-medium"
-                                        onclick="deleteModal('{{ route('admin.user.management.staff.delete', ['usid' => $staffUser->id]) }}')">
+                                        onclick="actionModal('{{ route('admin.user.management.staff.delete', ['usid' => $staffUser->id]) }}', 'modal','form-confirm','btn-close')">
                                         <i class="ti ti-trash"></i>
                                     </button>
                                 @endcan
@@ -52,4 +52,3 @@
     </div>
     @include('admin.pages.userManagement.disable-modal')
 @endsection
-

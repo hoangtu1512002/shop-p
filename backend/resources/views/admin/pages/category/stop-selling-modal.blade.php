@@ -21,20 +21,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.querySelector('#modal-stop');
-        const btnClose = document.getElementById('btn-close-modal-stop');
-        btnClose.addEventListener('click', function() {
-            modal.classList.add('hidden')
-        });
-    });
-
-    function stopSellingModal(route) {
-        const modal = document.querySelector('#modal-stop');
-        const confirm = document.querySelector('#form-stop-selling-confirm');
-        modal.classList.toggle('hidden');
-        confirm.action = route
-    }
-</script>

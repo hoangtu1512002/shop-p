@@ -23,17 +23,3 @@
         <p>{{ session('success') }}</p>
     </div>
 @endif
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var alert = document.getElementById('success-alert');
-        if (alert) {
-            setTimeout(function() {
-                alert.classList.add('show');
-                setTimeout(function() {
-                    alert.classList.remove('show');
-                }, 5000);
-            }, 100);
-        }
-    });
-</script>
