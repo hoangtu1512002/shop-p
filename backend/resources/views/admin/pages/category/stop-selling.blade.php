@@ -11,19 +11,14 @@
                 <table class="table">
                     <tr>
                         <th>Id</th>
-                        <th>Tên danh mục</th>
-                        <th>Hình ảnh</th>
-                        <th>Quản lí</th>
+                        <th width="50%">Tên danh mục</th>
+                        <th class="text-center" width="18%">Quản lí</th>
                     </tr>
                     @foreach ($categories as $category)
                         <tr>
                             <td class="font-bold">{{ $index++ }}</td>
                             <td class="font-bold">{{ $category->name }}</td>
-                            <td>
-                                <img class="w-[120px] h-[140px] bg-contain rounded-md block" src="{{ $category->image_url }}"
-                                    alt="hình ảnh">
-                            </td>
-                            <td class="font-bold">
+                            <td class="font-bold text-center">
                                 <button type="button" class="btn btn-success text-xl font-medium"
                                     onclick="actionModal('{{ route('admin.category.restore', ['id' => $category->id]) }}', 'restore-modal', 'form-restore-confirm', 'btn-close-restore-modal')">
                                     <i class="ti ti-arrow-back"></i>
@@ -36,6 +31,10 @@
                         </tr>
                     @endforeach
                 </table>
+            </div>
+            <div class="flex items-center justify-between bg-[#2a3547] py-[10px]">
+                {{ $categories->links('common.pagination') }}
+                <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categories) }}</nav>
             </div>
         </div>
     </div>

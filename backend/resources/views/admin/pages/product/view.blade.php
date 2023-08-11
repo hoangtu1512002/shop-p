@@ -3,9 +3,8 @@
 @section('content')
     <div>
         <div class="card p-[20px] mt-[40px]">
-            <div class="card-header">
-                <a href="{{ route('admin.product.create') }}" class="btn btn-outline-danger">Thêm mới <i class="ti ti-plus"></i></a>
-            </div>
+            @include('common.add-btn', ['route' => 'admin.product.create'])
+
             <div class="card-body p-[10px]">
                 <table class="table">
                     <tr>
@@ -27,12 +26,14 @@
                                 alt="hình ảnh">
                         </td>
                         <td>
-                           <nav class="bg-[#ff443d] rounded-lg inline-block py-[4px] px-[10px] font-bold text-[#fff]">
-                              {{ number_format(10000, 0, ',', '.') . 'đ' }}
-                           </nav>
+                            <nav class="bg-[#ff443d] rounded-lg inline-block py-[4px] px-[10px] font-bold text-[#fff]">
+                                {{ number_format(10000, 0, ',', '.') . 'đ' }}
+                            </nav>
                         </td>
                         <td>
-                           <nav class="border-[2px] border-[#ff443d] text-[#ff443d] inline-block rounded-lg py-[4px] px-[8px] font-bold">10</nav>
+                            <nav
+                                class="border-[2px] border-[#ff443d] text-[#ff443d] inline-block rounded-lg py-[4px] px-[8px] font-bold">
+                                10</nav>
                         </td>
                         <td class="font-bold">cơm gà</td>
                         <td>

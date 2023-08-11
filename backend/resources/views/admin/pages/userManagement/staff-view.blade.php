@@ -4,9 +4,7 @@
     <div>
         <div class="card p-[20px] mt-[40px]">
             @can('create-user')
-                <div class="card-header">
-                    <a href="{{ route('admin.user.management.staff.create') }}" class="btn btn-primary">Thêm mới <i class="ti ti-plus"></i></a>
-                </div>
+                @include('common.add-btn', ['route' => 'admin.user.management.staff.create'])
             @endcan
             <div class="card-body p-[10px]">
                 <table class="table">

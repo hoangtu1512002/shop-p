@@ -12,4 +12,6 @@ class Category extends Model
     protected $table = "categories";
 
     protected $fillable = ['name', 'image_name', 'image_url'];
+
+    protected $paginate = 20;
 }

@@ -5,27 +5,20 @@
         @include('admin.pages.category.form-search', ['route' => 'admin.category.view'])
         <div class="card p-[20px] mt-[10px]">
             @can('create-category')
-                <div class="card-header">
-                    <a href="{{ route('admin.category.create') }}" class="btn btn-primary">Thêm mới <i class="ti ti-plus"></i></a>
-                </div>
+                @include('common.add-btn', ['route' => 'admin.category.create'])
             @endcan
             <div class="card-body p-[10px]">
                 <table class="table">
                     <tr>
                         <th>Id</th>
-                        <th>Tên danh mục</th>
-                        <th>Hình ảnh</th>
+                        <th width="50%">Tên danh mục</th>
                         <th class="text-center" width="18%">Quản lí</th>
                     </tr>
                     @foreach ($categories as $category)
                         <tr>
                             <td class="font-bold">{{ $index++ }}</td>
                             <td class="font-bold">{{ $category->name }}</td>
-                            <td>
-                                <img class="w-[120px] h-[140px] bg-contain rounded-md block"
-                                    src="{{ $category->image_url }}" alt="hình ảnh">
-                            </td>
-                            <td class="font-bold text-end">
+                            <td class="font-bold text-center">
                                 @can('update-category')
                                     <a href="{{ route('admin.category.edit', ['id' => $category->id]) }}"
                                         class="btn btn-success text-xl font-medium"><i class="ti ti-edit"></i></a>

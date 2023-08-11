@@ -12,6 +12,16 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+
+    private $paginate;
+    private $category;
+
+    public function __construct(Category $category)
+    {
+        $this->category = $category;
+        $this->paginate = $category->paginate;
+    }
+
     public function index(Request $request)
     {
         $request->flash();
@@ -19,19 +29,19 @@ class CategoryController extends Controller
         $index = 1;
 
         if ($keyword === null) {
-            $categories = Category::where('status', 1)->paginate(10);
+            $categories = $this->category->where('status', 1)->paginate($this->paginate);
             return view('admin.pages.category.view', compact('categories', 'index'));
         }
 
-        $categories = Category::where('status', 1)->where(function ($query) use ($keyword) {
+        $categories = $this->category->where('status', 1)->where(function ($query) use ($keyword) {
             $query->where('name', 'like', '%' . $keyword . '%');
-        })->paginate(10);
+        })->paginate($this->paginate);
         return view('admin.pages.category.view', compact('categories', 'index'));
     }
 
     public function getStopSelling()
     {
-        $categories = Category::where('status', 2)->get();
+        $categories = $this->category->where('status', 2)->paginate($this->paginate);
         $index = 1;
         return view('admin.pages.category.stop-selling', compact('categories', 'index'));
     }
@@ -47,12 +57,11 @@ class CategoryController extends Controller
     public function store(CategoryRequest $categoryRequest)
     {
         $categoryRequest->flash();
-        $category = new Category;
         $data = $categoryRequest->all();
         $imageData = GoogleDriver::upload($data['image']);
         $data['image_url'] = $imageData['url'];
         $data['image_name'] = $imageData['name'];
-        $category->create($data);
+        $this->category->create($data);
         session()->flash('success', Message::createSuccess);
         return redirect()->route('admin.category.view');
     }
@@ -60,7 +69,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         if (Gate::allows('update-category')) {
-            $category = Category::findOrFail($id);
+            $category = $this->category->findOrFail($id);
             return view('admin.pages.category.edit', compact('category'));
         }
         return redirect()->back()->withErrors(Message::notAccess);
@@ -68,7 +77,7 @@ class CategoryController extends Controller
 
     public function update(CategoryRequest $categoryRequest, $id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->category->findOrFail($id);
         $data = $categoryRequest->all();
         if ($categoryRequest->image != null) {
             $imageOld = $category->image_name;
@@ -85,7 +94,7 @@ class CategoryController extends Controller
     public function delete($id)
     {
         if (Gate::allows('delete-category')) {
-            $category = Category::findOrFail($id);
+            $category = $this->category->findOrFail($id);
             $imageOld = $category->image_name;
             GoogleDriver::delete($imageOld);
             $category->delete();
@@ -98,7 +107,7 @@ class CategoryController extends Controller
     public function stopSelling($id)
     {
         if (Gate::allows('selling-category')) {
-            $category = Category::findOrFail($id);
+            $category = $this->category->findOrFail($id);
             $category->status = 2;
             $category->save();
             session()->flash('success', Message::updateSuccess);
@@ -110,7 +119,7 @@ class CategoryController extends Controller
     public function restore($id)
     {
         if (Gate::allows('selling-category')) {
-            $category = Category::findOrFail($id);
+            $category = $this->category->findOrFail($id);
             $category->status = 1;
             $category->save();
             session()->flash('success', Message::updateSuccess);
