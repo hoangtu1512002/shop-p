@@ -4,7 +4,7 @@
     <div>
         <div class="card p-[20px] mt-[40px]">
             <div class="card-header">
-                <a href="{{ route('admin.product.create') }}" class="btn btn-outline-danger">Thêm mới</a>
+                <a href="{{ route('admin.product.create') }}" class="btn btn-outline-danger">Thêm mới <i class="ti ti-plus"></i></a>
             </div>
             <div class="card-body p-[10px]">
                 <table class="table">

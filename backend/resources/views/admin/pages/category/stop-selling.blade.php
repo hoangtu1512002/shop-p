@@ -2,6 +2,7 @@
 
 @section('content')
     <div>
+        @include('admin.pages.category.form-search', ['route' => 'admin.category.stop.selling.view'])
         <div class="card p-[20px]">
             <div class="card-header">
                 <h4 class="card-title">Danh mục tạm ngừng sử dụng</h4>

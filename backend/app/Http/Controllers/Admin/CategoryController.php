@@ -12,10 +12,20 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::where('status', 1)->get();
+        $request->flash();
+        $keyword = $request->input("search");
         $index = 1;
+
+        if ($keyword === null) {
+            $categories = Category::where('status', 1)->paginate(10);
+            return view('admin.pages.category.view', compact('categories', 'index'));
+        }
+
+        $categories = Category::where('status', 1)->where(function ($query) use ($keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        })->paginate(10);
         return view('admin.pages.category.view', compact('categories', 'index'));
     }
 
@@ -87,8 +97,7 @@ class CategoryController extends Controller
 
     public function stopSelling($id)
     {
-        if(Gate::allows('selling-category'))
-        {
+        if (Gate::allows('selling-category')) {
             $category = Category::findOrFail($id);
             $category->status = 2;
             $category->save();
@@ -100,8 +109,7 @@ class CategoryController extends Controller
 
     public function restore($id)
     {
-        if(Gate::allows('selling-category'))
-        {
+        if (Gate::allows('selling-category')) {
             $category = Category::findOrFail($id);
             $category->status = 1;
             $category->save();
