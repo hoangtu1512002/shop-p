@@ -2,7 +2,7 @@
 
 @section('content')
     <div>
-        @include('admin.pages.category.form-search', ['route' => 'admin.category.view'])
+        @include('admin.pages.category.form-search', ['route' => 'admin.category.view', 'categories' => $categories])
         <div class="card p-[20px] mt-[10px]">
             <h4 class="mb-[40px]">Tất cả danh mục</h4>
             @can('create-category')
@@ -16,7 +16,7 @@
                         <th>Trạng thái</th>
                         <th class="text-center" width="18%">Quản lí</th>
                     </tr>
-                    @foreach ($categories as $category)
+                    @foreach ($categorySearch as $category)
                         <tr>
                             <td class="font-bold">{{ $index++ }}</td>
                             <td class="font-bold">{{ $category->name }}</td>
@@ -53,8 +53,8 @@
                 </table>
             </div>
             <div class="flex items-center justify-between bg-[#ff6b6b] py-[10px] rounded-lg">
-                {{ $categories->links('common.template.pagination') }}
-                <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categories) }}</nav>
+                {{ $categorySearch->links('common.template.pagination') }}
+                <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categorySearch) }}</nav>
             </div>
         </div>
     </div>

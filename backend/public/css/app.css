@@ -512,6 +512,18 @@ video {
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+.row-span-1 {
+  grid-row: span 1 / span 1;
+}
+.row-span-2 {
+  grid-row: span 2 / span 2;
+}
+.m-\[40px\] {
+  margin: 40px;
+}
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -537,6 +549,9 @@ video {
 }
 .mb-\[20px\] {
   margin-bottom: 20px;
+}
+.mb-\[40px\] {
+  margin-bottom: 40px;
 }
 .ml-\[10px\] {
   margin-left: 10px;
@@ -568,8 +583,8 @@ video {
 .mt-\[40px\] {
   margin-top: 40px;
 }
-.mb-\[40px\] {
-  margin-bottom: 40px;
+.mb-\[6px\] {
+  margin-bottom: 6px;
 }
 .block {
   display: block;
@@ -641,6 +656,9 @@ video {
 }
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;
@@ -728,8 +746,37 @@ video {
 .bg-\[rgba\(0\2c 0\2c 0\2c 0\.2\)\] {
   background-color: rgba(0,0,0,0.2);
 }
+.bg-\[9BE8D8\] {
+  background-color: 9BE8D8;
+}
+.bg-\[\#9BE8D8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(155 232 216 / var(--tw-bg-opacity));
+}
 .bg-\[\] {
   background-color: ;
+}
+.bg-\[\#\#78c1f3\] {
+  background-color: ##78c1f3;
+}
+.bg-\[\#78c1f3\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(120 193 243 / var(--tw-bg-opacity));
+}
+.bg-\[\#FAF3F0\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 243 240 / var(--tw-bg-opacity));
+}
+.bg-\[\#FFACAC\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 172 172 / var(--tw-bg-opacity));
+}
+.bg-\[\#\#ff6b6b\] {
+  background-color: ##ff6b6b;
+}
+.bg-\[\#FF9F9F\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 159 159 / var(--tw-bg-opacity));
 }
 .bg-contain {
   background-size: contain;
@@ -751,8 +798,8 @@ video {
 .p-\[4px\] {
   padding: 4px;
 }
-.p-\[8px\] {
-  padding: 8px;
+.p-\[40px\] {
+  padding: 40px;
 }
 .px-0 {
   padding-left: 0px;
@@ -810,11 +857,26 @@ video {
   padding-top: 8px;
   padding-bottom: 8px;
 }
+.px-\[20px\] {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.px-\[40px\] {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.py-\[6px\] {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
 .pl-\[10px\] {
   padding-left: 10px;
 }
 .pr-\[20px\] {
   padding-right: 20px;
+}
+.pb-\[6px\] {
+  padding-bottom: 6px;
 }
 .text-center {
   text-align: center;

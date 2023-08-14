@@ -41,7 +41,9 @@
 
             $('.loader-container').addClass('show');
 
-            $('.select2').select2();
+            $('.select2').select2({
+                placeholder: 'vui lòng chọn'
+            });
 
             @yield('scripts');
         });
