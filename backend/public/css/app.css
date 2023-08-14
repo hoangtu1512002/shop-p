@@ -568,6 +568,9 @@ video {
 .mt-\[40px\] {
   margin-top: 40px;
 }
+.mb-\[40px\] {
+  margin-bottom: 40px;
+}
 .block {
   display: block;
 }
@@ -725,6 +728,9 @@ video {
 .bg-\[rgba\(0\2c 0\2c 0\2c 0\.2\)\] {
   background-color: rgba(0,0,0,0.2);
 }
+.bg-\[\] {
+  background-color: ;
+}
 .bg-contain {
   background-size: contain;
 }
@@ -744,6 +750,9 @@ video {
 }
 .p-\[4px\] {
   padding: 4px;
+}
+.p-\[8px\] {
+  padding: 8px;
 }
 .px-0 {
   padding-left: 0px;

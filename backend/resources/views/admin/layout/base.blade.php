@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <style>
         @yield('styles');
     </style>

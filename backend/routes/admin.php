@@ -23,7 +23,6 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
         Route::get('edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::post('update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
         Route::post('delete/{id}', [CategoryController::class, 'delete'])->name('admin.category.delete');
-        Route::get('stop/selling', [CategoryController::class, 'getStopSelling'])->name('admin.category.stop.selling.view');
         Route::post('stop/selling/{id}', [CategoryController::class, 'stopSelling'])->name('admin.category.stop.selling');
         Route::post('restore/{id}', [CategoryController::class, 'restore'])->name('admin.category.restore');
     });
@@ -39,7 +38,6 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
 
     Route::prefix('user-management')->middleware('can:view-user-manager')->group(function () {
         Route::get('', [UserManagementController::class, 'getStaff'])->name('admin.user.management.staff');
-        Route::get('customer', [UserManagementController::class, 'getCustomers'])->name('admin.user.management.customer');
         Route::get('staff/create', [UserManagementController::class, 'createStaff'])->name('admin.user.management.staff.create');
         Route::post('staff/store', [UserManagementController::class, 'storeStaff'])->name('admin.user.management.staff.store');
         Route::get('staff/edit/{usid}', [UserManagementController::class, 'editStaff'])->name('admin.user.management.staff.edit');
@@ -47,11 +45,15 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
         Route::get('staff/info/{usid}', [UserManagementController::class, 'staffUserInfo'])->name('admin.user.management.staff.info');
         Route::post('staff/info/{usid}', [UserManagementController::class, 'staffUserInfoUpdate'])->name('admin.user.management.staff.info.update');
         Route::post('staff/disable/{usid}', [UserManagementController::class, 'staffUserDisable'])->name('admin.user.management.staff.disable');
-        Route::post('staff/delete/{usid}', [UserManagementController::class, 'staffUserDelete'])->name('admin.user.management.staff.delete');
-        Route::get('get/disable-user', [UserManagementController::class, 'getDisableUser'])->name('admin.user.management.disable');
         Route::post('restore/{usid}', [UserManagementController::class, 'restoreUser'])->name('admin.user.management.restore');
+        Route::post('staff/delete/{usid}', [UserManagementController::class, 'staffUserDelete'])->name('admin.user.management.staff.delete');
+
+
+
+
+        Route::get('customer', [UserManagementController::class, 'getCustomers'])->name('admin.user.management.customer');
     });
- 
+
 
 
     // api ajax route

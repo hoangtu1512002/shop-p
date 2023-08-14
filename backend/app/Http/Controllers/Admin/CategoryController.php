@@ -29,22 +29,16 @@ class CategoryController extends Controller
         $index = 1;
 
         if ($keyword === null) {
-            $categories = $this->category->where('status', 1)->paginate($this->paginate);
+            $categories = $this->category->paginate($this->paginate);
             return view('admin.pages.category.view', compact('categories', 'index'));
         }
 
-        $categories = $this->category->where('status', 1)->where(function ($query) use ($keyword) {
+        $categories = $this->category->where(function ($query) use ($keyword) {
             $query->where('name', 'like', '%' . $keyword . '%');
         })->paginate($this->paginate);
         return view('admin.pages.category.view', compact('categories', 'index'));
     }
 
-    public function getStopSelling()
-    {
-        $categories = $this->category->where('status', 2)->paginate($this->paginate);
-        $index = 1;
-        return view('admin.pages.category.stop-selling', compact('categories', 'index'));
-    }
 
     public function create()
     {
@@ -111,7 +105,7 @@ class CategoryController extends Controller
             $category->status = 2;
             $category->save();
             session()->flash('success', Message::updateSuccess);
-            return redirect()->route('admin.category.stop.selling.view');
+            return redirect()->route('admin.category.view');
         }
         return redirect()->back()->withErrors(Message::notAllowed);
     }

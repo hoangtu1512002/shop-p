@@ -3,6 +3,7 @@
 @section('content')
     <div>
         <div class="card p-[20px] mt-[40px]">
+            <h4 class="mb-[40px]">Tất cả nhân viên</h4>
             @can('create-user')
                 @include('common.template.add-btn', ['route' => 'admin.user.management.staff.create'])
             @endcan
@@ -12,32 +13,45 @@
                         <th>Id</th>
                         <th>Email</th>
                         <th>Vai trò</th>
+                        <th>Trạng thái</th>
                         <th>Quản lý</th>
                     </tr>
 
-                    @foreach ($staffUsers as $staffUser)
+                    @foreach ($staffUsers as $user)
                         <tr>
                             <td class="font-bold">{{ $index++ }}</td>
-                            <td class="font-bold">{{ $staffUser->email }}</td>
-                            <td class="font-bold text-[#fa896b]">{{ $staffUser->roles->pluck('name')->join(', ') }}</td>
+                            <td class="font-bold">{{ $user->email }}</td>
+                            <td class="font-bold text-[#fa896b]">{{ $user->roles->pluck('name')->join(', ') }}</td>
+                            <td>
+                                <nav
+                                    class="font-bold text-[#fff] inline-block py-[4px] px-[10px] rounded-lg {{ $user->is_active === 1 ? 'bg-[#ff6b6b]' : 'bg-[#000]' }}">
+                                    {{ $user->is_active === 1 ? 'Kích hoạt' : 'Vô hiệu' }}
+                                </nav>
                             <td>
                                 @can('update-user')
-                                    <a href="{{ route('admin.user.management.staff.edit', ['usid' => $staffUser->id]) }}"
+                                    <a href="{{ route('admin.user.management.staff.edit', ['usid' => $user->id]) }}"
                                         class="btn btn-success text-xl font-medium"><i class="ti ti-edit"></i></a>
                                 @endcan
                                 @can('update-info-user')
-                                    <a href="{{ route('admin.user.management.staff.info', ['usid' => $staffUser->id]) }}"
+                                    <a href="{{ route('admin.user.management.staff.info', ['usid' => $user->id]) }}"
                                         class="btn btn-primary text-xl font-medium"><i class="ti ti-eye"></i></a>
                                 @endcan
                                 @can('disable-user')
-                                    <button class="btn btn-warning text-xl font-medium"
-                                        onclick="actionModal('{{ route('admin.user.management.staff.disable', ['usid' => $staffUser->id]) }}','modal-disable','form-disable-confirm','btn-close-disable-modal')">
-                                        <i class="ti ti-x"></i>
-                                    </button>
+                                    @if ($user->is_active === 1)
+                                        <button class="btn btn-warning text-xl font-medium"
+                                            onclick="actionModal('{{ route('admin.user.management.staff.disable', ['usid' => $user->id]) }}','modal-disable','form-disable-confirm','btn-close-disable-modal')">
+                                            <i class="ti ti-x"></i>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-primary"
+                                            onclick="actionModal('{{ route('admin.user.management.restore', ['usid' => $user->id]) }}','restore-user-modal','form-user-restore-confirm','btn-restore-user-close')">
+                                            <i class="ti ti-arrow-back"></i>
+                                        </button>
+                                    @endif
                                 @endcan
                                 @can('delete-user')
                                     <button type="button" class="btn btn-danger text-xl font-medium"
-                                        onclick="actionModal('{{ route('admin.user.management.staff.delete', ['usid' => $staffUser->id]) }}', 'modal','form-confirm','btn-close')">
+                                        onclick="actionModal('{{ route('admin.user.management.staff.delete', ['usid' => $user->id]) }}', 'modal','form-confirm','btn-close')">
                                         <i class="ti ti-trash"></i>
                                     </button>
                                 @endcan
@@ -49,4 +63,5 @@
         </div>
     </div>
     @include('admin.pages.userManagement.disable-modal')
+    @include('admin.pages.userManagement.restore-user-modal')
 @endsection

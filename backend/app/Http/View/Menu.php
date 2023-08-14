@@ -27,12 +27,8 @@ class Menu
                         'route' => 'admin.category.create'
                     ],
                     (object) [
-                        'name' => 'Đang sử dụng',
+                        'name' => 'Tất cả danh mục',
                         'route' => 'admin.category.view'
-                    ],
-                    (object) [
-                        'name' => 'Đã ngưng sử dụng',
-                        'route' => 'admin.category.stop.selling.view'
                     ],
                 ]
             ],
@@ -59,18 +55,13 @@ class Menu
                 'icon' => '<i class="ti ti-users"></i>',
                 'child' => [
                     (object) [
-                        'name' => 'Quản lý nhân viên',
+                        'name' => 'Tất cả nhân viên',
                         'route' => 'admin.user.management.staff'
                     ],
                     (object) [
                         'name' => 'Thêm mới nhân viên',
                         'route' => 'admin.user.management.staff.create',
                         'view' => 'create-user'
-                    ],
-                    (object) [
-                        'name' => 'Nhân viên đã vô hiệu',
-                        'route' => 'admin.user.management.disable',
-                        'view' => 'disable-user'
                     ],
                     (object) [
                         'name' => 'Khách hàng',

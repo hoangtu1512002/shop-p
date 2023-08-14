@@ -28,9 +28,9 @@ class UserManagementController extends Controller
     {
         $staffUser = User::whereDoesntHave('roles', function ($query) {
             if ($this->checkUserReuqestRole() === 'Admin') {
-                $query->where('role', 'Customer')->orWhere('is_active', '0');
+                $query->where('role', 'Customer');
             } else {
-                $query->where('role', 'Customer')->orWhere('role', 'Admin')->orWhere('is_active', '0');
+                $query->where('role', 'Customer')->orWhere('role', 'Admin');
             }
         })->get();
 
@@ -160,20 +160,7 @@ class UserManagementController extends Controller
         dd($usid);
     }
 
-    public function getDisableUser()
-    {
-        $index = 1;
-        $users = User::whereHas('roles', function ($query) {
-            $query->where('role', '!==', 'Customer')->orWhere('is_active', 0);
-        })->get();
-
-        return view('admin.pages.userManagement.disable', [
-            'users' => $users,
-            'index'=> $index
-        ]);
-    }
-
-    public function restoreUser ($usid) 
+    public function restoreUser ($usid)
     {
         $restoreUser = User::findOrFail($usid);
         $restoreUser->is_active = 1;
