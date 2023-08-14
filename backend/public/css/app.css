@@ -535,6 +535,9 @@ video {
 .mb-\[10px\] {
   margin-bottom: 10px;
 }
+.mb-\[20px\] {
+  margin-bottom: 20px;
+}
 .ml-\[10px\] {
   margin-left: 10px;
 }
@@ -564,12 +567,6 @@ video {
 }
 .mt-\[40px\] {
   margin-top: 40px;
-}
-.mt-\[80px\] {
-  margin-top: 80px;
-}
-.mb-\[20px\] {
-  margin-bottom: 20px;
 }
 .block {
   display: block;
@@ -604,6 +601,9 @@ video {
 .max-h-\[220px\] {
   max-height: 220px;
 }
+.w-3\/4 {
+  width: 75%;
+}
 .w-\[120px\] {
   width: 120px;
 }
@@ -618,12 +618,6 @@ video {
 }
 .w-full {
   width: 100%;
-}
-.w-3\/4 {
-  width: 75%;
-}
-.w-2\/4 {
-  width: 50%;
 }
 .max-w-\[200px\] {
   max-width: 200px;
@@ -704,9 +698,6 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(255 68 61 / var(--tw-border-opacity));
 }
-.border-\[\] {
-  border-color: ;
-}
 .bg-\[\#000\] {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
@@ -723,53 +714,16 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(255 68 61 / var(--tw-bg-opacity));
 }
+.bg-\[\#ff6b6b\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 107 107 / var(--tw-bg-opacity));
+}
 .bg-\[\#fff\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 .bg-\[rgba\(0\2c 0\2c 0\2c 0\.2\)\] {
   background-color: rgba(0,0,0,0.2);
-}
-.bg-\[\#ebedee\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(235 237 238 / var(--tw-bg-opacity));
-}
-.bg-\[\#\] {
-  background-color: #;
-}
-.bg-\[\#ffc8dd\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 200 221 / var(--tw-bg-opacity));
-}
-.bg-\[\#\#8d99ae\] {
-  background-color: ##8d99ae;
-}
-.bg-\[\#8d99ae\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(141 153 174 / var(--tw-bg-opacity));
-}
-.bg-\[\#a8dadc\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(168 218 220 / var(--tw-bg-opacity));
-}
-.bg-\[\#fffafa\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 250 250 / var(--tw-bg-opacity));
-}
-.bg-\[\#ffd6ff\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 214 255 / var(--tw-bg-opacity));
-}
-.bg-\[\#f7a072\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(247 160 114 / var(--tw-bg-opacity));
-}
-.bg-\[\#ff758f\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 117 143 / var(--tw-bg-opacity));
-}
-.bg-\[\#\#ff443d\] {
-  background-color: ##ff443d;
 }
 .bg-contain {
   background-size: contain;
@@ -853,14 +807,8 @@ video {
 .pr-\[20px\] {
   padding-right: 20px;
 }
-.pt-\[50px\] {
-  padding-top: 50px;
-}
 .text-center {
   text-align: center;
-}
-.text-end {
-  text-align: end;
 }
 .text-\[12px\] {
   font-size: 12px;

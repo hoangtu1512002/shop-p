@@ -38,7 +38,7 @@
                     @endforeach
                 </table>
             </div>
-            <div class="flex items-center justify-between bg-[#2a3547] py-[10px]">
+            <div class="flex items-center justify-between bg-[#ff6b6b] py-[10px] rounded-lg">
                 {{ $categories->links('common.template.pagination') }}
                 <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categories) }}</nav>
             </div>

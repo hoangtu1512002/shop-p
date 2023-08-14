@@ -1,4 +1,4 @@
-<div class="w-full border bg-[#ff758f] rounded-lg">
+<div class="w-full border bg-[#ff6b6b] rounded-lg">
     <div class="">
         <form action="{{ route($route) }}" method="GET">
             <div class="py-[20px] px-[10px] text-center">
