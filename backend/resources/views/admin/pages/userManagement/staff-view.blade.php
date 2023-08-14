@@ -4,7 +4,7 @@
     <div>
         <div class="card p-[20px] mt-[40px]">
             @can('create-user')
-                @include('common.add-btn', ['route' => 'admin.user.management.staff.create'])
+                @include('common.template.add-btn', ['route' => 'admin.user.management.staff.create'])
             @endcan
             <div class="card-body p-[10px]">
                 <table class="table">

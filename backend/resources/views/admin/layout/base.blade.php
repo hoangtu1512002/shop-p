@@ -20,10 +20,10 @@
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         @yield('main')
-        @include('common.success')
-        @include('common.error')
-        @include('common.delete-modal-confirm')
-        @include('common.loader')
+        @include('common.effect.success')
+        @include('common.effect.error')
+        @include('common.template.delete-modal-confirm')
+        @include('common.effect.loader')
     </div>
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

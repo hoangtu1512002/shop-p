@@ -3,7 +3,7 @@
 @section('content')
     <div>
         <div class="card p-[20px] mt-[40px]">
-            @include('common.add-btn', ['route' => 'admin.product.create'])
+            @include('common.template.add-btn', ['route' => 'admin.product.create'])
 
             <div class="card-body p-[10px]">
                 <table class="table">

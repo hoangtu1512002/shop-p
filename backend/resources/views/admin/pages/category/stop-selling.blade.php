@@ -33,7 +33,7 @@
                 </table>
             </div>
             <div class="flex items-center justify-between bg-[#2a3547] py-[10px]">
-                {{ $categories->links('common.pagination') }}
+                {{ $categories->links('common.template.pagination') }}
                 <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categories) }}</nav>
             </div>
         </div>

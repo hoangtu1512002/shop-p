@@ -5,7 +5,7 @@
         @include('admin.pages.category.form-search', ['route' => 'admin.category.view'])
         <div class="card p-[20px] mt-[10px]">
             @can('create-category')
-                @include('common.add-btn', ['route' => 'admin.category.create'])
+                @include('common.template.add-btn', ['route' => 'admin.category.create'])
             @endcan
             <div class="card-body p-[10px]">
                 <table class="table">
@@ -39,7 +39,7 @@
                 </table>
             </div>
             <div class="flex items-center justify-between bg-[#2a3547] py-[10px]">
-                {{ $categories->links('common.pagination') }}
+                {{ $categories->links('common.template.pagination') }}
                 <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categories) }}</nav>
             </div>
         </div>
