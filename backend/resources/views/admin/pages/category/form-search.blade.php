@@ -14,7 +14,7 @@
 
                 <div class="form-group col-span-2 p-[10px]">
                     <label class="form-label pb-[6px]">Tìm kiếm theo từ khóa</label>
-                    <input type="text" class="form-control bg-[#fff]" name="keyword">
+                    <input type="search" class="form-control bg-[#fff]" name="keyword" value="{{ (old('keyword') ?? session('keyword')) }}">
                 </div>
             </div>
 

@@ -13,13 +13,11 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
 
-    private $paginate;
     private $category;
 
     public function __construct(Category $category)
     {
         $this->category = $category;
-        $this->paginate = $category->paginate;
     }
 
     public function index(Request $request)
@@ -30,20 +28,27 @@ class CategoryController extends Controller
         $category_id = $request->input("category");
         $index = 1;
 
-        if(!$category_id && !$keyword) {
+        if (!$category_id && !$keyword) {
             $categorySearch = $categories;
         }
 
-        if($keyword && $category_id === null) {
-            $categorySearch = $this->category->where('name', 'like', '%'.$keyword.'%')->paginate($this->paginate);
+        if ($keyword && $category_id === null) {
+            $categorySearch = $this->category->where('name', 'like', '%' . $keyword . '%')->paginate($this->paginate);
         }
 
-        if($category_id && $keyword || $category_id && $keyword === null) {
+        if ($category_id && $keyword || $category_id && $keyword === null) {
             $categorySearch = $this->category->where('id', $category_id)->paginate($this->paginate);
         }
 
+        // Thêm tham số query vào Paginator
+        $categorySearch->appends([
+            'keyword' => $keyword,
+            'category' => $category_id,
+        ]);
+
         return view('admin.pages.category.view', compact('categories', 'index', 'categorySearch'));
     }
+
 
 
     public function create()

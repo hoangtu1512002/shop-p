@@ -53,7 +53,7 @@
                 </table>
             </div>
             <div class="flex items-center justify-between bg-[#ff6b6b] py-[10px] rounded-lg">
-                {{ $categorySearch->links('common.template.pagination') }}
+                {{ $categorySearch->appends(['keyword' => request()->input('keyword'), 'category' => request()->input('category')])->links('common.template.pagination') }}
                 <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categorySearch) }}</nav>
             </div>
         </div>
