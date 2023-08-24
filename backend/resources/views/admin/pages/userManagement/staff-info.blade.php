@@ -100,19 +100,21 @@
 @endsection
 
 @section('scripts')
-    $(document).ready(function() {
-    $('.number').inputmask('99999999 đ')
-    $('.phone').inputmask('9999999999 đ')
-    $('.date').inputmask('dd-mm-yyyy')
-    $('#upload').on('change', function(e) {
-    var input = event.target;
-    if(input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-    $('#show-avatar').attr('src', e.target.result)
-    }
-    reader.readAsDataURL(input.files[0]);
-    }
-    })
-    })
+    <script>
+        $(document).ready(function() {
+            $('.number').inputmask('99999999 đ')
+            $('.phone').inputmask('9999999999 đ')
+            $('.date').inputmask('dd-mm-yyyy')
+            $('#upload').on('change', function(e) {
+                var input = event.target;
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#show-avatar').attr('src', e.target.result)
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            })
+        })
+    </script>
 @endsection

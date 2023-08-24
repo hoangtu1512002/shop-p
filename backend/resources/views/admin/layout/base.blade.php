@@ -10,20 +10,15 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/select2.css') }}">
-    <style>
-        @yield('styles');
-    </style>
+    @yield('styles');
 </head>
 
 <body>
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-        data-sidebar-position="fixed" data-header-position="fixed">
-        @yield('main')
-        @include('common.effect.success')
-        @include('common.effect.error')
-        @include('common.template.delete-modal-confirm')
-        @include('common.effect.loader')
-    </div>
+    @yield('main')
+    @include('common.effect.success')
+    @include('common.effect.error')
+    @include('common.template.delete-modal-confirm')
+    @include('common.effect.loader')
     <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/sidebarmenu.js') }}?v=js_sidebar"></script>
@@ -44,8 +39,6 @@
             $('.select2').select2({
                 placeholder: 'vui lòng chọn'
             });
-
-            @yield('scripts');
         });
 
         $('form').on('submit', function(e) {
@@ -56,6 +49,7 @@
             $('.loader-container').removeClass('show');
         });
     </script>
+    @yield('scripts');
 </body>
 
 </html>

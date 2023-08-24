@@ -25,10 +25,11 @@ class CategoryController extends Controller
         $request->flash();
         $categories = $this->category->paginate($this->paginate);
         $keyword = $request->input("keyword");
-        $category_id = $request->input("category");
+        $category_id = $request->input("category_id");
+        $status = $request->input("status");
         $index = 1;
 
-        if (!$category_id && !$keyword) {
+        if (!$category_id && !$keyword && $status) {
             $categorySearch = $categories;
         }
 
@@ -36,14 +37,13 @@ class CategoryController extends Controller
             $categorySearch = $this->category->where('name', 'like', '%' . $keyword . '%')->paginate($this->paginate);
         }
 
-        if ($category_id && $keyword || $category_id && $keyword === null) {
+        if ($category_id && $keyword || $category_id && $keyword === null || $category_id && $status) {
             $categorySearch = $this->category->where('id', $category_id)->paginate($this->paginate);
         }
 
-        // Thêm tham số query vào Paginator
         $categorySearch->appends([
             'keyword' => $keyword,
-            'category' => $category_id,
+            'category_id' => $category_id,
         ]);
 
         return view('admin.pages.category.view', compact('categories', 'index', 'categorySearch'));

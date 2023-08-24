@@ -16,34 +16,36 @@
 @endsection
 
 @section('scripts')
-    $(document).ready(function() {
-        var roleId = $('.form-staff').val();
-        var user = @json($user);
-        loadPermissions(roleId, user.id); 
-    
-        $('.form-staff').on('change', function(e) {
-            var newRoleId = e.target.value;
-            loadPermissions(newRoleId, user.id);
-    
+    <script>
+        $(document).ready(function() {
+            var roleId = $('.form-staff').val();
+            var user = @json($user);
+            loadPermissions(roleId, user.id);
+
+            $('.form-staff').on('change', function(e) {
+                var newRoleId = e.target.value;
+                loadPermissions(newRoleId, user.id);
+
+            });
+
+
+
+            function loadPermissions(roleId, userId = null) {
+                $.ajax({
+                        url: "{{ url('admin/get/permission') }}/" + roleId,
+                        type: "POST",
+                        data: {
+                            type: "edit",
+                            userId: userId
+                        }
+                    })
+                    .then(function(res) {
+                        $('.checkbox-container').html(res);
+                    })
+                    .catch(function(error) {
+                        console.log('error:', error);
+                    });
+            }
         });
-        
-
-
-        function loadPermissions(roleId, userId = null) {
-            $.ajax({
-                    url: "{{ url('admin/get/permission') }}/" + roleId,
-                    type: "POST",
-                    data: {
-                        type: "edit",
-                        userId: userId
-                    }
-                })
-                .then(function(res) {
-                    $('.checkbox-container').html(res);
-                })
-                .catch(function(error) {
-                    console.log('error:', error);
-                });
-        }
-    });
+    </script>
 @endsection
