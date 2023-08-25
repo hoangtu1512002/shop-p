@@ -78,4 +78,35 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserInfo::class, 'id', 'user_id');
     }
+
+    private $limit = 10;
+
+    public function findByConditions($request)
+    {
+        $role = $request->input('role');
+        $keyword = $request->input('keyword');
+        $status = $request->input('status');
+        $selectedFilters = ['email' => $keyword, 'is_active' => $status];
+        $conditions  = [];
+
+        $query = $this->query();
+
+        if ($role !== null) {
+            $query = $this->whereHas('roles', function ($query) use ($role) {
+                $query->where('id', $role);
+            });
+        }
+
+        foreach ($selectedFilters as $field => $value) {
+            if (isset($value)) {
+                $conditions[] = [$field, 'like', '%' . $value . '%'];
+            }
+        }
+
+        $query->where($conditions);
+
+        $result = $query->paginate($this->limit)->appends($selectedFilters);
+
+        return $result;
+    }
 }

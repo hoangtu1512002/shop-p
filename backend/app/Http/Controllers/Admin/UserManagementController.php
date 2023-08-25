@@ -17,6 +17,12 @@ use App\Helpers\GoogleDriver;
 
 class UserManagementController extends Controller
 {
+    private $staff;
+
+    public function __construct(User $staff)
+    {
+        $this->staff = $staff;
+    }
 
     private function checkUserReuqestRole()
     {
@@ -24,19 +30,26 @@ class UserManagementController extends Controller
         return $userRequest->roles->pluck('role')->first();
     }
 
-    public function getStaff()
+    public function getStaff(Request $request)
     {
-        $staffUser = User::whereDoesntHave('roles', function ($query) {
+        if($this->checkUserReuqestRole() === 'Admin') {
+            $roles = Role::all();
+        } else {
+            $roles = Role::where('name', '!=', 'Admin')->get();
+        }
+
+        $staffUser = $this->staff->whereDoesntHave('roles', function ($query) {
             if ($this->checkUserReuqestRole() === 'Admin') {
                 $query->where('role', 'Customer');
             } else {
                 $query->where('role', 'Customer')->orWhere('role', 'Admin');
             }
-        })->get();
+        })->getModel()->findByConditions($request);
 
         return view('admin.pages.userManagement.staff-view', [
             'index' => 1,
-            'staffUsers' => $staffUser
+            'staffUsers' => $staffUser,
+            'roles' => $roles
         ]);
     }
 
@@ -53,7 +66,7 @@ class UserManagementController extends Controller
 
     public function storeStaff(StaffUserRequest $staffUserRequest)
     {
-        $staffUserNew = User::create([
+        $staffUserNew = $this->staff->create([
             'email' => $staffUserRequest->email,
             'password' => Hash::make($staffUserRequest->password),
         ]);
@@ -66,7 +79,7 @@ class UserManagementController extends Controller
     public function editStaff($usid)
     {
         if (Gate::allows('update-user')) {
-            $userEdit = User::findOrFail($usid);
+            $userEdit = $this->staff->findOrFail($usid);
             $roleUserEdit = $userEdit->roles->pluck('role')->first();
 
             $roles = $this->checkUserReuqestRole() === 'Admin' ? Role::all() : Role::where('role', '!=', 'Admin')->get();
@@ -85,7 +98,7 @@ class UserManagementController extends Controller
 
     public function updateStaff(StaffUserRequest $staffUserRequest, $usid)
     {
-        $staffUserUpdate = User::findOrFail($usid);
+        $staffUserUpdate = $this->staff->findOrFail($usid);
 
         if ($staffUserUpdate->id === Auth::id()) {
             return redirect()->back()->withErrors(Message::notAccess);
@@ -145,7 +158,7 @@ class UserManagementController extends Controller
 
     public function staffUserDisable($usid)
     {
-        $staffUserUpdate = User::findOrFail($usid);
+        $staffUserUpdate = $this->staff->findOrFail($usid);
         if ($staffUserUpdate->id === Auth::id()) {
             return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
         }
@@ -162,7 +175,7 @@ class UserManagementController extends Controller
 
     public function restoreUser ($usid)
     {
-        $restoreUser = User::findOrFail($usid);
+        $restoreUser = $this->staff->findOrFail($usid);
         $restoreUser->is_active = 1;
         $restoreUser->save();
         session()->flash('success', Message::updateSuccess);

@@ -2,7 +2,10 @@
 
 @section('content')
     <div>
-        @include('admin.pages.category.form-search', ['route' => 'admin.category.view', 'categories' => $categories])
+        @include('admin.pages.category.form-search', [
+            'route' => 'admin.category.view',
+            'categories' => $categories,
+        ])
         <div class="card p-[20px] mt-[10px]">
             <h4 class="mb-[40px]">Tất cả danh mục</h4>
             @can('create-category')
@@ -53,7 +56,7 @@
                 </table>
             </div>
             <div class="flex items-center justify-between bg-[#ff6b6b] py-[10px] rounded-lg">
-                {{ $categorySearch->appends(['keyword' => request()->input('keyword'), 'category' => request()->input('category')])->links('common.template.pagination') }}
+                {{ $categorySearch->appends(['keyword' => request()->input('keyword'), 'category_id' => request()->input('id'), 'status' => request()->input('status')])->links('common.template.pagination') }}
                 <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($categorySearch) }}</nav>
             </div>
         </div>

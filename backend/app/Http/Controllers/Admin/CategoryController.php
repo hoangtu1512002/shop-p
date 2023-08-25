@@ -23,30 +23,14 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $request->flash();
-        $categories = $this->category->paginate($this->paginate);
-        $keyword = $request->input("keyword");
-        $category_id = $request->input("category_id");
-        $status = $request->input("status");
-        $index = 1;
+        $categories = $this->category->all();
+        $categorySearch = $this->category->findByConditions($request);
 
-        if (!$category_id && !$keyword && $status) {
-            $categorySearch = $categories;
-        }
-
-        if ($keyword && $category_id === null) {
-            $categorySearch = $this->category->where('name', 'like', '%' . $keyword . '%')->paginate($this->paginate);
-        }
-
-        if ($category_id && $keyword || $category_id && $keyword === null || $category_id && $status) {
-            $categorySearch = $this->category->where('id', $category_id)->paginate($this->paginate);
-        }
-
-        $categorySearch->appends([
-            'keyword' => $keyword,
-            'category_id' => $category_id,
+        return view('admin.pages.category.view', [
+            'index' => 1,
+            'categories'     => $categories,
+            'categorySearch' => $categorySearch,
         ]);
-
-        return view('admin.pages.category.view', compact('categories', 'index', 'categorySearch'));
     }
 
 

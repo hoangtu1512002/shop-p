@@ -2,6 +2,10 @@
 
 @section('content')
     <div>
+        @include('admin.pages.userManagement.staff-form-search', [
+            'route' => 'admin.user.management.staff',
+            'roles' => $roles
+        ])
         <div class="card p-[20px] mt-[40px]">
             <h4 class="mb-[40px]">Tất cả nhân viên</h4>
             @can('create-user')
@@ -59,6 +63,10 @@
                         </tr>
                     @endforeach
                 </table>
+            </div>
+            <div class="flex items-center justify-between bg-[#ff6b6b] py-[10px] rounded-lg">
+                {{ $staffUsers->appends(['keyword' => request()->input('keyword'), 'role' => request()->input('role'), 'status' => request()->input('status')])->links('common.template.pagination') }}
+                <nav class="text-[16px] font-bold text-[#fff] mr-[10px]">số lượng: {{ count($staffUsers) }}</nav>
             </div>
         </div>
     </div>
