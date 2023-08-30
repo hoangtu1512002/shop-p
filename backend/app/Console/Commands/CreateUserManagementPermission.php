@@ -55,12 +55,6 @@ class CreateUserManagementPermission extends Command
             ]
         ]);
 
-        foreach ($permissions as $permission) {
-            if (!Permission::where('permission', $permission['permission'])->where('name', $permission['name'])->exists()) {
-                Permission::create(['permission' => $permission['permission'], 'name' => $permission['name']]);
-            }
-        }
-
-        $this->info('Default permissions created successfully.');
+        $this->createPermission(new Permission, $permissions);
     }
 }

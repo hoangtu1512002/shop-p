@@ -17,13 +17,13 @@
                     <label for="" class="form-label flex">Họ tên nhân viên <nav
                             class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
                     <input type="text" class="form-control" name="fullname" placeholder="Nguyễn Văn A"
-                        value="{{ $user->fullname ?? (old('fullname') ?? session('fullname')) }}">
+                        value="{{ $userInfo->fullname ?? (old('fullname') ?? session('fullname')) }}">
                 </div>
 
                 <div class="form-group mt-[20px]">
                     <label for="" class="form-label">Biệt danh</label>
                     <input type="text" class="form-control" name="nickname"
-                        value="{{ $user->nickname ?? (old('nickname') ?? session('nickname')) }}">
+                        value="{{ $userInfo->nickname ?? (old('nickname') ?? session('nickname')) }}">
                 </div>
 
                 <div class="form-group mt-[20px]">
@@ -32,7 +32,7 @@
                         </nav></label>
                     <input type="text" class="form-control date" name="date_of_birth" maxlength="10"
                         placeholder="dd-mm-yyyy"
-                        value="{{ $user->date_of_birth ?? (old('date_of_birth') ?? session('date_of_birth')) }}">
+                        value="{{ $userInfo->date_of_birth ?? (old('date_of_birth') ?? session('date_of_birth')) }}">
                 </div>
 
                 <div class="form-group mt-[20px]">
@@ -42,13 +42,13 @@
                     <div class="flex">
                         <div>
                             <input type="radio" value="male" id="male" name="gender"
-                                @if (isset($user->gender) && $user->gender === 'male') checked @endif>
+                                @if (isset($user->gender) && $userInfo->gender === 'male') checked @endif>
                             <label for="male" class="form-label">Nam</label>
                         </div>
 
                         <div class="ml-[20px]">
                             <input type="radio" value="female" id="female" name="gender"
-                                @if (isset($user->gender) && $user->gender === 'female') checked @endif>
+                                @if (isset($user->gender) && $userInfo->gender === 'female') checked @endif>
                             <label for="female" class="form-label">Nữ</label>
                         </div>
                     </div>
@@ -58,14 +58,14 @@
                     <label for="" class="form-label flex">Số điện thoại <nav
                             class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
                     <input type="text" class="form-control phone" name="phone" maxlength="10" placeholder="0382584001"
-                        value="{{ $user->phone ?? (old('phone') ?? session('phone')) }}">
+                        value="{{ $userInfo->phone ?? (old('phone') ?? session('phone')) }}">
                 </div>
 
                 <div class="form-group mt-[20px]">
                     <label for="" class="form-label flex">Địa chỉ <nav class="text-[#ff443d] text-[20px] ml-[4px]">*
                         </nav></label>
                     <input type="text" class="form-control" name="address"
-                        value="{{ $user->address ?? (old('address') ?? session('address')) }}">
+                        value="{{ $userInfo->address ?? (old('address') ?? session('address')) }}">
                 </div>
 
                 <div class="form-group mt-[20px]">
@@ -73,7 +73,7 @@
                             class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
                     <input type="text" class="form-control date" name="date_start_work" maxlength="10"
                         placeholder="dd-mm-yyyy"
-                        value="{{ $user->date_start_work ?? (old('date_start_work') ?? session('date_start_work')) }}">
+                        value="{{ $userInfo->date_start_work ?? (old('date_start_work') ?? session('date_start_work')) }}">
                 </div>
 
                 <div class="form-group mt-[20px]">
@@ -81,18 +81,18 @@
                             class="text-[#ff443d] text-[20px] ml-[4px]">*
                         </nav></label>
                     <input type="text" class="form-control number" name="salary"
-                        value="{{ $user->salary ?? (old('salary') ?? session('salary')) }}">
+                        value="{{ $userInfo->salary ?? (old('salary') ?? session('salary')) }}">
                 </div>
 
                 <div class="form-group mt-[20px]">
                     <label for="" class="form-label">Avatar</label>
                     @include('admin.pages.userManagement.avatar', [
-                        'avatar_url' => $user->avatar_url ?? null,
+                        'avatar_url' => $userInfo->avatar_url ?? null,
                     ])
                 </div>
 
                 <button type="submit" id="button"
-                    class="border-2 border-[#5d87ff] rounded-lg py-[10px] px-[60px] mt-[20px] mx-auto hover:bg-[#5d87ff] hover:text-white duration-200">xác
+                    class="border-2 border-[#ff6b6b] text-[16px] rounded-lg py-[6px] px-[60px] mt-[20px] mx-auto hover:bg-[#ff6b6b] hover:text-white duration-200">xác
                     nhận</button>
             </form>
         </div>

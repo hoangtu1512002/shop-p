@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+
 use App\Policies\Admin\AdminMenuPolicy;
 use App\Policies\Admin\CategoryPolicy;
+use App\Policies\Admin\ProductPolicy;
 use App\Policies\Admin\UserManagementPolicy;
 
 
@@ -30,15 +32,16 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         $this->showTemplateByRoles();
         $this->checkPermissionCategory();
+        $this->checkPermissionProduct();
         $this->checkPermissionUserManagement();
     }
 
     /**
      * Show Template and Menu by Roles
-     * 
+     *
      * @return void
      */
-    private function showTemplateByRoles() 
+    private function showTemplateByRoles()
     {
         Gate::define('view-dashboard', [AdminMenuPolicy::class, 'viewDashboard']);
         Gate::define('view-category', [AdminMenuPolicy::class, 'viewCategory']);
@@ -48,7 +51,7 @@ class AuthServiceProvider extends ServiceProvider
 
      /**
      *  Category permission
-     * 
+     *
      * @return void
      */
     private function checkPermissionCategory ()
@@ -59,9 +62,21 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('selling-category', [CategoryPolicy::class, 'selling']);
     }
 
+     /**
+     *  Product permission
+     *
+     * @return void
+     */
+    private function checkPermissionProduct ()
+    {
+        Gate::define('create-product', [ProductPolicy::class, 'create']);
+        Gate::define('update-product', [ProductPolicy::class, 'update']);
+        Gate::define('delete-product', [ProductPolicy::class, 'delete']);
+    }
+
     /**
-     *  Category permission
-     * 
+     *  staff permission
+     *
      * @return void
      */
     private function checkPermissionUserManagement ()

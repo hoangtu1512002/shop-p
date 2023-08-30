@@ -32,19 +32,11 @@ class UserManagementController extends Controller
 
     public function getStaff(Request $request)
     {
-        if($this->checkUserReuqestRole() === 'Admin') {
-            $roles = Role::all();
-        } else {
-            $roles = Role::where('name', '!=', 'Admin')->get();
-        }
-
+        $roles = Role::all();
+        $status = [$this->staff::STATUS_ACTIVE, $this->staff::STATUS_INACTIVE];
         $staffUser = $this->staff->whereDoesntHave('roles', function ($query) {
-            if ($this->checkUserReuqestRole() === 'Admin') {
-                $query->where('role', 'Customer');
-            } else {
-                $query->where('role', 'Customer')->orWhere('role', 'Admin');
-            }
-        })->getModel()->findByConditions($request);
+            $query->where('role', 'Customer');
+        })->getModel()->findByConditions($request, $status);
 
         return view('admin.pages.userManagement.staff-view', [
             'index' => 1,
@@ -85,7 +77,7 @@ class UserManagementController extends Controller
             $roles = $this->checkUserReuqestRole() === 'Admin' ? Role::all() : Role::where('role', '!=', 'Admin')->get();
 
             if ($this->checkUserReuqestRole() != 'Admin' && $roleUserEdit === 'Admin') {
-                return redirect()->route('admin.user.management.staff')->withErrors('bạn không được phép truy cập mục này');
+                return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
             }
 
             return view('admin.pages.userManagement.staff-edit', [
@@ -118,11 +110,16 @@ class UserManagementController extends Controller
     public function staffUserInfo($usid)
     {
         if (Gate::allows('update-info-user')) {
-            $user = UserInfo::find($usid);
-            if ($user) {
-                return view('admin.pages.userManagement.staff-info', ['usid' => $usid, 'user' => $user]);
+            $staffRole = $this->staff->findOrFail($usid)->roles->pluck('role')->first();
+            if ($this->checkUserReuqestRole() != 'Admin' && $staffRole === 'Admin') {
+                return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
+            } else {
+                $userInfo = UserInfo::find($usid);
+                if ($userInfo) {
+                    return view('admin.pages.userManagement.staff-info', ['usid' => $usid, 'userInfo' => $userInfo]);
+                }
+                return view('admin.pages.userManagement.staff-info', ['usid' => $usid, 'userInfo' => null]);
             }
-            return view('admin.pages.userManagement.staff-info', ['usid' => $usid, 'user' => null]);
         }
         return redirect()->back()->withErrors(Message::notAccess);
     }
@@ -159,11 +156,21 @@ class UserManagementController extends Controller
     public function staffUserDisable($usid)
     {
         $staffUserUpdate = $this->staff->findOrFail($usid);
-        if ($staffUserUpdate->id === Auth::id()) {
+        $staffDisableRole = $staffUserUpdate->roles->pluck('role')->first();
+        if ($staffUserUpdate->id === Auth::id() || $this->checkUserReuqestRole() != 'Admin' && $staffDisableRole === 'Admin') {
             return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
         }
-        $staffUserUpdate->is_active = 0;
+        $staffUserUpdate->status = $this->staff::STATUS_INACTIVE;
         $staffUserUpdate->save();
+        session()->flash('success', Message::updateSuccess);
+        return redirect()->route('admin.user.management.staff');
+    }
+
+    public function restoreUser($usid)
+    {
+        $restoreUser = $this->staff->findOrFail($usid);
+        $restoreUser->status = $this->staff::STATUS_ACTIVE;
+        $restoreUser->save();
         session()->flash('success', Message::updateSuccess);
         return redirect()->route('admin.user.management.staff');
     }
@@ -171,14 +178,5 @@ class UserManagementController extends Controller
     public function staffUserDelete($usid)
     {
         dd($usid);
-    }
-
-    public function restoreUser ($usid)
-    {
-        $restoreUser = $this->staff->findOrFail($usid);
-        $restoreUser->is_active = 1;
-        $restoreUser->save();
-        session()->flash('success', Message::updateSuccess);
-        return redirect()->route('admin.user.management.staff');
     }
 }

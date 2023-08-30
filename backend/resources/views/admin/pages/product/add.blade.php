@@ -5,3 +5,4 @@
         @include('admin.form.product-form', ['action' => route('admin.product.store'), 'product' => null, 'categories' => $categories ])
     </div>
 @endsection
+

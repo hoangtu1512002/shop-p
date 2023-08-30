@@ -16,17 +16,17 @@ class ProductController extends Controller
         return view('admin.pages.product.view');
     }
 
-    public function create () 
+    public function create ()
     {
-        if(Gate::allows('create')) {
+        if(Gate::allows('create-product')) {
             $categories = Category::all();
             return view('admin.pages.product.add', ['categories' => $categories]);
         }
         return redirect()->back()->withErrors(Message::notAccess);
     }
 
-    public function store (Request $request) 
+    public function store (Request $request)
     {
-        
+
     }
 }

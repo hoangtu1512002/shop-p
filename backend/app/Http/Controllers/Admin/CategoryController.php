@@ -97,7 +97,7 @@ class CategoryController extends Controller
     {
         if (Gate::allows('selling-category')) {
             $category = $this->category->findOrFail($id);
-            $category->status = 2;
+            $category->status = $this->category::STATUS_INACTIVE;
             $category->save();
             session()->flash('success', Message::updateSuccess);
             return redirect()->route('admin.category.view');
@@ -109,7 +109,7 @@ class CategoryController extends Controller
     {
         if (Gate::allows('selling-category')) {
             $category = $this->category->findOrFail($id);
-            $category->status = 1;
+            $category->status = $this->category::STATUS_ACTIVE;
             $category->save();
             session()->flash('success', Message::updateSuccess);
             return redirect()->route('admin.category.view');

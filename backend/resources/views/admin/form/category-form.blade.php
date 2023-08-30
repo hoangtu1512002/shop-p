@@ -4,7 +4,7 @@
         <label for="" class="form-label flex">Tên danh mục <nav class="text-[#ff443d] text-[20px] ml-[4px]">*</nav>
         </label>
         <input type="text" class="form-control" name="name"
-            value="{{ $category->name ?? (old('name') ?? session('name')) }}">
+            value="{{ $category->name ?? (old('name') ?? session('name')) }}" placeholder="nhập tên danh mục">
     </div>
 
     <div class="form-group mt-[20px]">
@@ -28,7 +28,44 @@
     </div>
 
     <button type="submit" id="button"
-        class="border-2 border-[#5d87ff] rounded-lg py-[10px] px-[60px] mt-[20px] mx-auto hover:bg-[#5d87ff] hover:text-white duration-200">xác
+        class="border-2 border-[#ff6b6b] text-[16px] rounded-lg py-[6px] px-[60px] mt-[20px] mx-auto hover:bg-[#ff6b6b] hover:text-white duration-200">xác
         nhận</button>
 </form>
 
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            const image_input = $('#image-category');
+
+            image_input.on('change', function(e) {
+                previewImage(e);
+            });
+
+            $(document).on('load', function() {
+                previewImage({
+                    target: image_input.get(0)
+                });
+            });
+
+            function previewImage(event) {
+                const input = event.target;
+                const loader = $('.loader-container');
+                const previewImg = $('.preview-img');
+                const reader = new FileReader();
+
+                if (input.files && input.files[0]) {
+
+                    reader.onload = function(e) {
+                        previewImg.attr('src', e.target.result);
+                        previewImg.removeClass('hidden');
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    previewImg.attr('src', '');
+                    previewImg.addClass('hidden');
+                }
+            }
+        });
+    </script>
+@endsection

@@ -12,7 +12,7 @@
                 @include('common.template.add-btn', ['route' => 'admin.user.management.staff.create'])
             @endcan
             <div class="card-body p-[10px]">
-                <table class="table">
+                <table class="table table-hover table-light">
                     <tr>
                         <th>Id</th>
                         <th>Email</th>
@@ -28,8 +28,8 @@
                             <td class="font-bold text-[#fa896b]">{{ $user->roles->pluck('name')->join(', ') }}</td>
                             <td>
                                 <nav
-                                    class="font-bold text-[#fff] inline-block py-[4px] px-[10px] rounded-lg {{ $user->is_active === 1 ? 'bg-[#ff6b6b]' : 'bg-[#000]' }}">
-                                    {{ $user->is_active === 1 ? 'Kích hoạt' : 'Vô hiệu' }}
+                                    class="font-bold text-[#fff] inline-block py-[4px] px-[10px] rounded-lg {{ $user->status === 1 ? 'bg-[#ff6b6b]' : 'bg-[#000]' }}">
+                                    {{ $user->status === 1 ? 'Kích hoạt' : 'Vô hiệu' }}
                                 </nav>
                             <td>
                                 @can('update-user')
@@ -41,7 +41,7 @@
                                         class="btn btn-primary text-xl font-medium"><i class="ti ti-eye"></i></a>
                                 @endcan
                                 @can('disable-user')
-                                    @if ($user->is_active === 1)
+                                    @if ($user->status === 1)
                                         <button class="btn btn-warning text-xl font-medium"
                                             onclick="actionModal('{{ route('admin.user.management.staff.disable', ['usid' => $user->id]) }}','modal-disable','form-disable-confirm','btn-close-disable-modal')">
                                             <i class="ti ti-x"></i>

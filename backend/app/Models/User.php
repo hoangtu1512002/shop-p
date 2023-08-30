@@ -17,6 +17,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 2;
+    const STATUS_DELETED = 3;
+
     protected $table = 'users';
 
     /**
@@ -81,7 +85,7 @@ class User extends Authenticatable
 
     private $limit = 10;
 
-    public function findByConditions($request)
+    public function findByConditions($request, $filterStatus)
     {
         $role = $request->input('role');
         $keyword = $request->input('keyword');
@@ -92,10 +96,13 @@ class User extends Authenticatable
         $query = $this->query();
 
         if ($role !== null) {
-            $query = $this->whereHas('roles', function ($query) use ($role) {
+            $query = $this->whereIn('status', $filterStatus)->whereHas('roles', function ($query) use ($role) {
                 $query->where('id', $role);
             });
+        } else {
+            $query = $this->whereIn('status', $filterStatus);
         }
+
 
         foreach ($selectedFilters as $field => $value) {
             if (isset($value)) {

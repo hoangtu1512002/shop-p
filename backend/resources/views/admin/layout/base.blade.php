@@ -26,6 +26,7 @@
     <script src="{{ asset('js/inputmask.js') }}"></script>
     <script src="{{ asset('js/modals.js') }}"></script>
     <script src="{{ asset('js/alert.js') }}"></script>
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({

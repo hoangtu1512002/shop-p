@@ -5,21 +5,21 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Permission;
 
-class CrateCategoryManagementPermission extends Command
+class CreateProductManagementPermission extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:permission:category';
+    protected $signature = 'make:permission:product';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create default category management permission';
+    protected $description = 'Create default product management permission';
 
     /**
      * Execute the console command.
@@ -30,18 +30,18 @@ class CrateCategoryManagementPermission extends Command
     {
         $permissions = collect([
             [
-                'permission' => 'create_category',
-                'name' => 'Quyền tạo mới danh mục'
+                'permission' => 'create_product',
+                'name' => 'Quyền tạo mới sản phẩm'
             ],
 
             [
-                'permission' => 'update_category',
-                'name' => 'Quyền sửa danh muc'
+                'permission' => 'update_product',
+                'name' => 'Quyền sửa sản phẩm'
             ],
 
             [
-                'permission' => 'delete_category',
-                'name' => 'Quyền xóa danh mục'
+                'permission' => 'delete_product',
+                'name' => 'Quyền xóa sản phẩm'
             ]
         ]);
 

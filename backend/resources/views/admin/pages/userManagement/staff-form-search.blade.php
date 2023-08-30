@@ -19,7 +19,7 @@
 
             <div class="form-group mx-[20px] mt-[16px] col-span-2">
                 <label class="form-label pb-[6px] text-[16px]">Tìm kiếm theo từ khóa</label>
-                <input type="search" name="keyword" class="form-control"
+                <input type="search" name="keyword" class="form-control" placeholder="nhập từ khóa..."
                     value="{{ old('keyword') ?? session('keyword') }}">
             </div>
         </div>
@@ -32,7 +32,7 @@
                     <label for="active">Kích hoạt</label>
                 </div>
                 <div class="form-group">
-                    <input type="radio" name="status" value="2" id="in-active">
+                    <input type="radio" name="status" value="0" id="in-active">
                     <label for="in_active">Vô hiệu</label>
                 </div>
             </div>
