@@ -3699,7 +3699,7 @@
                             return 1 != e.maximum && (t += "s"), t;
                         },
                         noResults: function () {
-                            return "No results found";
+                            return "Không có dữ liệu";
                         },
                         searching: function () {
                             return "Searching…";

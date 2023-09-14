@@ -1,12 +1,30 @@
 @section('styles')
     <style>
-        .tox-statusbar, .tox-promotion {
+        .tox.tox-tinymce {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .tox-statusbar,
+        .tox-promotion {
             display: none !important;
         }
 
-        .upload {
+        .upload, .upload-image-list {
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
+
+        .delete-img {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%)
+        }
+
+        .upload-image-list:hover .delete-img{
+            opacity: 1;
+            visibility: visible;
+        }
+
     </style>
 @endsection
 
@@ -24,17 +42,21 @@
             <div class="form-group mt-[20px]">
                 <label for="" class="form-label flex">hình ảnh <nav class="text-[#ff443d] text-[20px] ml-[4px]">
                         *</nav></label>
-                <input type="file" class="form-control" name="image[]" id="image" hidden>
+                <input type="file" class="form-control" name="image[]" id="input-image" accept="image/*" multiple
+                    hidden>
 
-                <div class="upload border w-full h-auto min-h-[200px] rounded-sm">
-                    <div class="upload-image-item grid grid-cols-5 p-[10px] gap-[8px]">
-                        <div class="upload-image-list js-show-image w-[160px] min-h-[180px] rounded-sm  bg-contain">
-                            {{-- <img src="" alt="" class="w-full h-full rounded-sm bg-contain"> --}}
-                        </div>
+                <div class="upload border w-full h-auto min-h-[200px] rounded-sm relative">
+                    <div class="upload-image-item w-full min-h-[200px] rounded-sm grid grid-cols-5 gap-[8px] p-[8px]" id="js-show-img">
+                        {{-- <div class="upload-image-list grid-span-1 border relative z-[99]">
+                            <img src="https://images.unsplash.com/photo-1682688759457-52bcb4dc1578?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60" alt="" class="w-[160px] h-[200px] rounded-sm bg-contain cursor-pointer">
+                            <button type="button" class="delete-img absolute bottom-[0] left-[50%] bg-[#ff6b6b] text-[18px] text-[#fff] cursor-pointer px-[10px] py-[4px] rounded-sm z-[999]">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </div> --}}
                     </div>
-                    <div class="upload-action w-full h-auto flex justify-end">
+                    <div class="upload-action w-full h-auto flex justify-end absolute bottom-0">
                         <button type="button" class="bg-[#ff6b6b] text-[#fff] rounded-sm">
-                            <label for="image" class="py-[10px] px-[40px]">Chọn ảnh</label>
+                            <label for="input-image" class="py-[10px] px-[40px]">Chọn ảnh</label>
                         </button>
                     </div>
                 </div>
@@ -56,13 +78,12 @@
             <div class="form-group mt-[20px]">
                 <label for="" class="form-label flex">Số lượng sản phẩm <nav
                         class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
-                <input type="text" class="form-control" placeholder="nhập số lượng">
+                <input type="text" class="total form-control" placeholder="nhập số lượng">
             </div>
 
             <div class="form-group mt-[20px]">
-                <label for="" class="form-label flex">Danh mục sản phẩm <nav
-                        class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
-                <select name="" id="" class="select2 form-select">
+                <label for="" class="form-label flex">Danh mục sản phẩm</label>
+                <select name="category[]" id="" class="select2 form-control" multiple="multiple">
                     <option value="" class="form-option"></option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -79,7 +100,49 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('.price').inputmask('9999999 đ')
+            $('.price').inputmask('9999999 đ');
+            $('.total').inputmask('999');
+
+            $('#input-image').on('change', function(event) {
+                const input = event.target;
+                const files = input.files;
+                const showImages = $('.upload-image-item');
+
+                if (files.length > 0) {
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const reader = new FileReader();
+
+                        reader.onload = function(result) {
+                            const showImage = $('<div></div>');
+                            showImage.attr('class', 'upload-image-list grid-span-1 border relative z-[99]')
+                            showImages.append(showImage);
+
+                            const img = $('<img/>');
+                            img.attr('src', result.target.result);
+                            img.attr('alt', 'hình ảnh');
+                            img.attr('class', 'w-[160px] h-[200px] rounded-sm bg-contain');
+                            showImage.append(img);
+
+                            const deleteImgButton = $('<button></button>');
+                            deleteImgButton.attr('type', 'button');
+                            deleteImgButton.attr('class', 'delete-img absolute bottom-[0] left-[50%] bg-[#ff6b6b] text-[18px] text-[#fff] cursor-pointer px-[10px] py-[4px] rounded-sm z-[999]');
+
+                            const deleteImgButtonIcon = $('<i></i>');
+                            deleteImgButtonIcon.attr('class', 'ti ti-trash');
+                            deleteImgButton.append(deleteImgButtonIcon);
+
+                            showImage.append(deleteImgButton);
+
+                            deleteImgButton.on('click', function() {
+                                showImage.remove();
+                            });
+                        }
+
+                        reader.readAsDataURL(file);
+                    }
+                }
+            })
         })
         tinymce.init({
             selector: '#description',
