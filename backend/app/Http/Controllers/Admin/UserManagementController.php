@@ -7,7 +7,6 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Helpers\Message;
 use App\Http\Requests\Admin\StaffUserRequest;
 use App\Http\Requests\Admin\StaffUserInfoRequest;
 use App\Models\UserInfo;
@@ -53,7 +52,7 @@ class UserManagementController extends Controller
                 'roles' => $roles
             ]);
         }
-        return redirect()->back()->withErrors(Message::notAccess);
+        return redirect()->back()->withErrors(trans('messages.notAccess'));
     }
 
     public function storeStaff(StaffUserRequest $staffUserRequest)
@@ -64,7 +63,7 @@ class UserManagementController extends Controller
         ]);
         $staffUserNew->roles()->sync($staffUserRequest->role);
         $staffUserNew->permissions()->sync($staffUserRequest->permissions);
-        session()->flash('success', Message::createSuccess);
+        session()->flash('success', trans('messages.createSuccess'));
         return redirect()->route('admin.user.management.staff');
     }
 
@@ -77,7 +76,7 @@ class UserManagementController extends Controller
             $roles = $this->checkUserReuqestRole() === 'Admin' ? Role::all() : Role::where('role', '!=', 'Admin')->get();
 
             if ($this->checkUserReuqestRole() != 'Admin' && $roleUserEdit === 'Admin') {
-                return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
+                return redirect()->route('admin.user.management.staff')->withErrors(trans('messages.notAccess'));
             }
 
             return view('admin.pages.userManagement.staff-edit', [
@@ -85,7 +84,7 @@ class UserManagementController extends Controller
                 'user' => $userEdit
             ]);
         }
-        return redirect()->back()->withErrors(Message::notAccess);
+        return redirect()->back()->withErrors(trans('messages.notAccess'));
     }
 
     public function updateStaff(StaffUserRequest $staffUserRequest, $usid)
@@ -93,7 +92,7 @@ class UserManagementController extends Controller
         $staffUserUpdate = $this->staff->findOrFail($usid);
 
         if ($staffUserUpdate->id === Auth::id()) {
-            return redirect()->back()->withErrors(Message::notAccess);
+            return redirect()->back()->withErrors(trans('messages.notAccess'));
         }
 
         $staffUserUpdate->update([
@@ -103,7 +102,7 @@ class UserManagementController extends Controller
 
         $staffUserUpdate->roles()->sync($staffUserRequest->role);
         $staffUserUpdate->permissions()->sync($staffUserRequest->permissions);
-        session()->flash('success', Message::updateSuccess);
+        session()->flash('success', trans('messages.updateSuccess'));
         return redirect()->route('admin.user.management.staff');
     }
 
@@ -112,7 +111,7 @@ class UserManagementController extends Controller
         if (Gate::allows('update-info-user')) {
             $staffRole = $this->staff->findOrFail($usid)->roles->pluck('role')->first();
             if ($this->checkUserReuqestRole() != 'Admin' && $staffRole === 'Admin') {
-                return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
+                return redirect()->route('admin.user.management.staff')->withErrors(trans('messages.notAccess'));
             } else {
                 $userInfo = UserInfo::find($usid);
                 if ($userInfo) {
@@ -121,7 +120,7 @@ class UserManagementController extends Controller
                 return view('admin.pages.userManagement.staff-info', ['usid' => $usid, 'userInfo' => null]);
             }
         }
-        return redirect()->back()->withErrors(Message::notAccess);
+        return redirect()->back()->withErrors(trans('messages.notAccess'));
     }
 
     public function staffUserInfoUpdate(StaffUserInfoRequest $staffUserInfoRequest, $usid)
@@ -149,7 +148,7 @@ class UserManagementController extends Controller
             GoogleDriver::delete($oldAvatar);
         }
 
-        session()->flash('success', Message::createSuccess);
+        session()->flash('success', trans('message.createSuccess'));
         return redirect()->route('admin.user.management.staff');
     }
 
@@ -158,11 +157,11 @@ class UserManagementController extends Controller
         $staffUserUpdate = $this->staff->findOrFail($usid);
         $staffDisableRole = $staffUserUpdate->roles->pluck('role')->first();
         if ($staffUserUpdate->id === Auth::id() || $this->checkUserReuqestRole() != 'Admin' && $staffDisableRole === 'Admin') {
-            return redirect()->route('admin.user.management.staff')->withErrors(Message::notAccess);
+            return redirect()->route('admin.user.management.staff')->withErrors(trans('messages.notAccess'));
         }
         $staffUserUpdate->status = $this->staff::STATUS_INACTIVE;
         $staffUserUpdate->save();
-        session()->flash('success', Message::updateSuccess);
+        session()->flash('success', trans('messages.updateSuccess'));
         return redirect()->route('admin.user.management.staff');
     }
 
@@ -171,7 +170,7 @@ class UserManagementController extends Controller
         $restoreUser = $this->staff->findOrFail($usid);
         $restoreUser->status = $this->staff::STATUS_ACTIVE;
         $restoreUser->save();
-        session()->flash('success', Message::updateSuccess);
+        session()->flash('success', trans('messages.updateSuccess'));
         return redirect()->route('admin.user.management.staff');
     }
 

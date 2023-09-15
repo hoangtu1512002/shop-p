@@ -30,10 +30,10 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
     Route::prefix('product')->middleware('can:view-product')->group(function () {
         Route::get('', [ProductController::class, 'index'])->name('admin.product.view');
         Route::get('create', [ProductController::class, 'create'])->name('admin.product.create');
-        Route::post('create', [ProductController::class, 'create'])->name('admin.product.store');
-        Route::get('edit/{id}', [ProductController::class, 'edit'])->name('admin.product.edit');
-        Route::post('update/{id}', [ProductController::class, 'update'])->name('admin.product.update');
-        Route::post('delete/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
+        Route::post('create', [ProductController::class, 'store'])->name('admin.product.store');
+        Route::get('edit/{productId}', [ProductController::class, 'edit'])->name('admin.product.edit');
+        Route::post('update/{productId}', [ProductController::class, 'update'])->name('admin.product.update');
+        Route::post('delete/{productId}', [ProductController::class, 'delete'])->name('admin.product.delete');
     });
 
     Route::prefix('user-management')->middleware('can:view-user-manager')->group(function () {

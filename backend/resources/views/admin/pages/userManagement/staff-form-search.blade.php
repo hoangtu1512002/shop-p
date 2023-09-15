@@ -32,7 +32,7 @@
                     <label for="active">Kích hoạt</label>
                 </div>
                 <div class="form-group">
-                    <input type="radio" name="status" value="0" id="in-active">
+                    <input type="radio" name="status" value="2" id="in-active">
                     <label for="in_active">Vô hiệu</label>
                 </div>
             </div>

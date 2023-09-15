@@ -22,13 +22,13 @@ class Menu
                 'icon' => '<i class="ti ti-brand-coinbase"></i>',
                 'child' => [
                     (object) [
+                        'name' => 'Tất cả danh mục',
+                        'route' => 'admin.category.view'
+                    ],
+                    (object) [
                         'name' => 'Thêm danh mục mới',
                         'view' => 'create-category', // lấy tại file AuthServiceProvider
                         'route' => 'admin.category.create'
-                    ],
-                    (object) [
-                        'name' => 'Tất cả danh mục',
-                        'route' => 'admin.category.view'
                     ],
                 ]
             ],

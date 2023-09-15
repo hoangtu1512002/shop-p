@@ -48,13 +48,14 @@
             });
 
             function previewImage(event) {
+                $('.loader-container').addClass('show');
                 const input = event.target;
                 const loader = $('.loader-container');
                 const previewImg = $('.preview-img');
                 const reader = new FileReader();
 
                 if (input.files && input.files[0]) {
-
+                    $('.loader-container').removeClass('show');
                     reader.onload = function(e) {
                         previewImg.attr('src', e.target.result);
                         previewImg.removeClass('hidden');

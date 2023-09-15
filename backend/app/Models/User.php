@@ -90,7 +90,7 @@ class User extends Authenticatable
         $role = $request->input('role');
         $keyword = $request->input('keyword');
         $status = $request->input('status');
-        $selectedFilters = ['email' => $keyword, 'is_active' => $status];
+        $selectedFilters = ['email' => $keyword, 'status' => $status];
         $conditions  = [];
 
         $query = $this->query();

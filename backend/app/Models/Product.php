@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
+use App\Models\Category;
 
 class Product extends Model
 {
@@ -16,4 +18,14 @@ class Product extends Model
     protected $table = "products";
 
     protected $fillable = ['name', 'image_name', 'image_url', 'price', 'total', 'description', 'status', 'category_id'];
+
+    /**
+     * The roles that belong to the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function Categories(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }

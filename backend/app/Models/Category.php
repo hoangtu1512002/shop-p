@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Relations\belongsToMany;
+use App\Models\Product;
+
 
 class Category extends Model
 {

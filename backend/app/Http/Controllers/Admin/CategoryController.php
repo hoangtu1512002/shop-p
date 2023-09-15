@@ -40,7 +40,7 @@ class CategoryController extends Controller
         if (Gate::allows('create-category')) {
             return view('admin.pages.category.add');
         }
-        return redirect()->back()->withErrors(Message::notAccess);
+        return redirect()->back()->withErrors(trans('messages.notAccess'));
     }
 
     public function store(CategoryRequest $categoryRequest)
@@ -51,7 +51,7 @@ class CategoryController extends Controller
         $data['image_url'] = $imageData['url'];
         $data['image_name'] = $imageData['name'];
         $this->category->create($data);
-        session()->flash('success', Message::createSuccess);
+        session()->flash('success', trans('messages.createSuccess'));
         return redirect()->route('admin.category.view');
     }
 
@@ -61,7 +61,7 @@ class CategoryController extends Controller
             $category = $this->category->findOrFail($id);
             return view('admin.pages.category.edit', compact('category'));
         }
-        return redirect()->back()->withErrors(Message::notAccess);
+        return redirect()->back()->withErrors(trans('messages.notAccess'));
     }
 
     public function update(CategoryRequest $categoryRequest, $id)
@@ -76,7 +76,7 @@ class CategoryController extends Controller
             $data['image_name'] = $imageNew['name'];
         }
         $category->update($data);
-        session()->flash('success', Message::updateSuccess);
+        session()->flash('success', trans('messages.updateSuccess'));
         return redirect()->route('admin.category.view');
     }
 
@@ -87,10 +87,10 @@ class CategoryController extends Controller
             $imageOld = $category->image_name;
             GoogleDriver::delete($imageOld);
             $category->delete();
-            session()->flash('success', Message::deleteSuccess);
+            session()->flash('success', trans('messages.deleteSuccess'));
             return redirect()->route('admin.category.view');
         }
-        return redirect()->back()->withErrors(Message::notAllowed);
+        return redirect()->back()->withErrors(trans('messages.notAllowed'));
     }
 
     public function stopSelling($id)
@@ -99,10 +99,10 @@ class CategoryController extends Controller
             $category = $this->category->findOrFail($id);
             $category->status = $this->category::STATUS_INACTIVE;
             $category->save();
-            session()->flash('success', Message::updateSuccess);
+            session()->flash('success', trans('messages.updateSuccess'));
             return redirect()->route('admin.category.view');
         }
-        return redirect()->back()->withErrors(Message::notAllowed);
+        return redirect()->back()->withErrors(trans('messages.notAllowed'));
     }
 
     public function restore($id)
@@ -111,9 +111,9 @@ class CategoryController extends Controller
             $category = $this->category->findOrFail($id);
             $category->status = $this->category::STATUS_ACTIVE;
             $category->save();
-            session()->flash('success', Message::updateSuccess);
+            session()->flash('success', trans('messages.updateSuccess'));
             return redirect()->route('admin.category.view');
         }
-        return redirect()->back()->withErrors(Message::notAllowed);
+        return redirect()->back()->withErrors(trans('messages.notAllowed'));
     }
 }
