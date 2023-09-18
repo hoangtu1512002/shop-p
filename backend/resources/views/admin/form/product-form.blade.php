@@ -47,7 +47,7 @@
 
                 <div class="upload border w-full h-auto min-h-[200px] rounded-sm relative">
                     <div class="upload-image-item w-full min-h-[200px] rounded-sm grid grid-cols-5 gap-[8px] p-[8px]">
-                       {{-- display image using js --}}
+                        {{-- display image using js --}}
                     </div>
                     <div class="upload-action w-full h-auto flex justify-end">
                         <button type="button" class="bg-[#ff6b6b] text-[#fff] rounded-sm">
@@ -67,13 +67,15 @@
             <div class="form-group">
                 <label for="" class="form-label flex">Giá tiền <nav class="text-[#ff443d] text-[20px] ml-[4px]">
                         *</nav></label>
-                <input type="text" name="price" class="form-control price" placeholder="nhập giá tiền" value="{{ $product->price ?? (old('name') ?? session('name')) }}">
+                <input type="text" name="price" class="form-control price" placeholder="nhập giá tiền"
+                    value="{{ $product->price ?? (old('name') ?? session('name')) }}">
             </div>
 
             <div class="form-group mt-[20px]">
                 <label for="" class="form-label flex">Số lượng sản phẩm <nav
                         class="text-[#ff443d] text-[20px] ml-[4px]">*</nav></label>
-                <input type="text" name="total" class="total form-control" placeholder="nhập số lượng" value="{{ $product->total ?? (old('name') ?? session('name')) }}">
+                <input type="text" name="total" class="total form-control" placeholder="nhập số lượng"
+                    value="{{ $product->total ?? (old('name') ?? session('name')) }}">
             </div>
 
             <div class="form-group mt-[20px]">
@@ -81,7 +83,8 @@
                 <select name="category_id" id="" class="select2 form-control">
                     <option value="" class="form-option"></option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" @if (isset($product->category_id) === $category->id) selected @endif>
+                            {{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -98,13 +101,22 @@
             $('.price').inputmask('9999999 đ');
             $('.total').inputmask('999');
 
-            $('#input-image').on('change', function(event) {
+            const inputUpload = $('#input-image');
+            const showImagesElement = $('.upload-image-item');
+            const product = @json($product);
+
+            if(product !== null) {
+                const imagesEdit = JSON.parse(product.image_url);
+                for (let i = 0; i < imagesEdit.length; i++) {
+                    createElementShowImages(imagesEdit[i], showImagesElement)
+                }
+            }
+
+            inputUpload.on('change', function(event) {
                 const files = event.target.files;
-                const showImages = $('.upload-image-item');
-                $('.loader-container').addClass('show');
-                previewImages(files, showImages);
-                $('.loader-container').removeClass('show');
+                previewImages(files, showImagesElement);
             })
+
 
             function previewImages(files, showImagesElement) {
                 for (let i = 0; i < files.length; i++) {
@@ -112,34 +124,38 @@
                     const reader = new FileReader();
 
                     reader.onload = function(result) {
-                        const showImage = $('<div></div>');
-                        showImage.attr('class', 'upload-image-list grid-span-1 border relative z-[99]')
-                        showImagesElement.append(showImage);
-
-                        const img = $('<img/>');
-                        img.attr('src', result.target.result);
-                        img.attr('alt', 'hình ảnh');
-                        img.attr('class', 'w-[160px] h-[200px] rounded-sm bg-contain');
-                        showImage.append(img);
-
-                        const deleteImgButton = $('<button></button>');
-                        deleteImgButton.attr('type', 'button');
-                        deleteImgButton.attr('class',
-                            'delete-img absolute bottom-[0] left-[50%] bg-[#ff6b6b] text-[18px] text-[#fff] cursor-pointer px-[10px] py-[4px] rounded-sm z-[999]'
-                            );
-
-                        const deleteImgButtonIcon = $('<i></i>');
-                        deleteImgButtonIcon.attr('class', 'ti ti-trash');
-                        deleteImgButton.append(deleteImgButtonIcon);
-
-                        showImage.append(deleteImgButton);
-
-                        deleteImgButton.on('click', function() {
-                            showImage.remove();
-                        });
+                        createElementShowImages(result.target.result, showImagesElement)
                     }
                     reader.readAsDataURL(file);
                 }
+            }
+
+            function createElementShowImages(imagesUrl, showImagesElement) {
+                const showImage = $('<div></div>');
+                showImage.attr('class', 'upload-image-list grid-span-1 border relative z-[99]')
+                showImagesElement.append(showImage);
+
+                const img = $('<img/>');
+                img.attr('src', imagesUrl);
+                img.attr('alt', 'hình ảnh');
+                img.attr('class', 'w-[160px] h-[200px] rounded-sm bg-contain');
+                showImage.append(img);
+
+                const deleteImgButton = $('<button></button>');
+                deleteImgButton.attr('type', 'button');
+                deleteImgButton.attr('class',
+                    'delete-img absolute bottom-[0] left-[50%] bg-[#ff6b6b] text-[18px] text-[#fff] cursor-pointer px-[10px] py-[4px] rounded-sm z-[999]'
+                );
+
+                const deleteImgButtonIcon = $('<i></i>');
+                deleteImgButtonIcon.attr('class', 'ti ti-trash');
+                deleteImgButton.append(deleteImgButtonIcon);
+
+                showImage.append(deleteImgButton);
+
+                deleteImgButton.on('click', function() {
+                    showImage.remove();
+                });
             }
         })
         tinymce.init({

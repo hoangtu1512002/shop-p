@@ -36,7 +36,7 @@
                                     {{ $product->total }}
                                 </nav>
                             </td>
-                            <td class="font-bold">{{ $product->Categories->name }}</td>
+                            <td class="font-bold">{{ $product->Category->name }}</td>
                             <td>
                                 <a href="{{ route('admin.product.edit', ['productId' => $product->id]) }}" class="btn btn-success text-xl font-medium"><i class="ti ti-edit"></i></a>
                                 <button type="button" class="btn btn-danger text-xl font-medium">

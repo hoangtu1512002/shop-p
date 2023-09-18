@@ -6,7 +6,7 @@
             <p class="card-title">Cập nhật sản phẩm</p>
         </div>
         <div class="card-body">
-            @include('admin.form.product-form', ['action' => route('admin.product.update', $product->id), 'product' => $product, 'categories' => $categories ])
+            @include('admin.form.product-form', ['action' => route('admin.product.update', $product->id), 'product' => $product, 'categories' => $categories])
         </div>
     </div>
 @endsection

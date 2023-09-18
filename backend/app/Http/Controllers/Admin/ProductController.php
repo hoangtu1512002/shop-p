@@ -48,7 +48,7 @@ class ProductController extends Controller
 
     public function edit($productId)
     {
-        if (Gate::allows('update-product') === true) {
+        if (Gate::allows('update-product')) {
             $productEdit = $this->product->where('id', $productId)->where('status', $this->product::STATUS_ACTIVE)->first();
             $categories = Category::all();
             if (empty($productEdit)) {
