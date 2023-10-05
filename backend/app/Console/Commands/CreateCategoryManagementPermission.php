@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Permission;
 
-class CrateCategoryManagementPermission extends Command
+class CreateCategoryManagementPermission extends Command
 {
     /**
      * The name and signature of the console command.
