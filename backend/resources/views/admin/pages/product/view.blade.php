@@ -23,7 +23,7 @@
                             <td class="font-bold">{{ $product->name }}</td>
                             <td>
                                 <img class="w-[120px] h-[140px] bg-contain rounded-md block"
-                                    src="{{ json_decode($product->image_url)[0] }}"
+                                    src="{{ json_decode($product->image_url) ?  json_decode($product->image_url)[0] : null }}"
                                     alt="hình ảnh">
                             </td>
                             <td>

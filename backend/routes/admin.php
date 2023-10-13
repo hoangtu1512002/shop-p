@@ -34,6 +34,7 @@ Route::prefix('admin')->middleware(['admin.login', 'url.remove.trailing.slash'])
         Route::get('edit/{productId}', [ProductController::class, 'edit'])->name('admin.product.edit');
         Route::post('update/{productId}', [ProductController::class, 'update'])->name('admin.product.update');
         Route::post('delete/{productId}', [ProductController::class, 'delete'])->name('admin.product.delete');
+        Route::post('delete/image/{productId}', [ProductController::class, 'deleteImage'])->name('admin.product.delete.image');
     });
 
     Route::prefix('user-management')->middleware('can:view-user-manager')->group(function () {

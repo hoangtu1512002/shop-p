@@ -83,8 +83,9 @@
                 <select name="category_id" id="" class="select2 form-control">
                     <option value="" class="form-option"></option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" @if (isset($product->category_id) === $category->id) selected @endif>
-                            {{ $category->name }}</option>
+                        <option value="{{ $category->id }}" @if (isset($product->category_id) && $product->category_id === $category->id) selected @endif>
+                            {{ $category->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -105,10 +106,11 @@
             const showImagesElement = $('.upload-image-item');
             const product = @json($product);
 
-            if(product !== null) {
-                const imagesEdit = JSON.parse(product.image_url);
-                for (let i = 0; i < imagesEdit.length; i++) {
-                    createElementShowImages(imagesEdit[i], showImagesElement)
+            if (product !== null) {
+                const imagesEditUrls = JSON.parse(product.image_url);
+                const imagesEditNames = JSON.parse(product.image_name);
+                for (let i = 0; i < imagesEditUrls.length; i++) {
+                    createElementShowImages(imagesEditUrls[i], imagesEditNames[i], showImagesElement)
                 }
             }
 
@@ -124,19 +126,22 @@
                     const reader = new FileReader();
 
                     reader.onload = function(result) {
-                        createElementShowImages(result.target.result, showImagesElement)
+                        createElementShowImages(result.target.result, null, showImagesElement)
                     }
                     reader.readAsDataURL(file);
                 }
             }
 
-            function createElementShowImages(imagesUrl, showImagesElement) {
+            function createElementShowImages(imagesUrl, imageName = null, showImagesElement) {
                 const showImage = $('<div></div>');
-                showImage.attr('class', 'upload-image-list grid-span-1 border relative z-[99]')
+                showImage.attr('class', 'upload-image-list grid-span-1 border relative')
                 showImagesElement.append(showImage);
 
                 const img = $('<img/>');
                 img.attr('src', imagesUrl);
+                if (imageName !== null) {
+                    img.attr('img-name', imageName);
+                }
                 img.attr('alt', 'hình ảnh');
                 img.attr('class', 'w-[160px] h-[200px] rounded-sm bg-contain');
                 showImage.append(img);
@@ -144,7 +149,7 @@
                 const deleteImgButton = $('<button></button>');
                 deleteImgButton.attr('type', 'button');
                 deleteImgButton.attr('class',
-                    'delete-img absolute bottom-[0] left-[50%] bg-[#ff6b6b] text-[18px] text-[#fff] cursor-pointer px-[10px] py-[4px] rounded-sm z-[999]'
+                    'delete-img absolute bottom-[0] left-[50%] bg-[#ff6b6b] text-[18px] text-[#fff] cursor-pointer px-[10px] py-[4px] rounded-sm'
                 );
 
                 const deleteImgButtonIcon = $('<i></i>');
@@ -152,11 +157,33 @@
                 deleteImgButton.append(deleteImgButtonIcon);
 
                 showImage.append(deleteImgButton);
-
                 deleteImgButton.on('click', function() {
+                    const imgDeleteName = img.attr("img-name");
+                    const imgDeleteUrl = img.attr("src");
                     showImage.remove();
+                    if (imgDeleteName) {
+                        $.ajax({
+                            url: "{{ url('admin/product/delete/image') }}/" + product.id,
+                            type: "POST",
+                            data: {
+                                imgDeleteName: imgDeleteName,
+                                imgDeleteUrl: imgDeleteUrl
+                            },
+                            beforeSend: function() {
+                                $('.loader-container').addClass('show');
+                            },
+                            complete: function() {
+                                $('.loader-container').removeClass('show');
+                            }
+                        })
+                    }
                 });
             }
+
+            window.addEventListener('beforeunload', function(e) {
+                e.preventDefault();
+                e.returnValue = "Bạn có chắc muốn chuyển tới trang khác";
+            });
         })
         tinymce.init({
             selector: '#description',
